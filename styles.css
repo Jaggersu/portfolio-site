@@ -39,10 +39,32 @@ body {
     height: 70px;
 }
 
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 .nav-logo h2 {
     color: #FFD700;
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+.logo-img {
+    height: 65px;
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.logo-text {
+    color: #FFD700;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .nav-menu {
@@ -200,15 +222,19 @@ section {
     color: #555;
 }
 
-/* Services Section */
-.services-grid {
+/* Member Benefits Section */
+.benefits {
+    background: #f8f9fa;
+}
+
+.benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
 
-.service-card {
+.benefit-card {
     background: white;
     padding: 2.5rem 2rem;
     border-radius: 15px;
@@ -218,33 +244,33 @@ section {
     border: 2px solid transparent;
 }
 
-.service-card:hover {
+.benefit-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 51, 102, 0.15);
     border-color: #FFD700;
 }
 
-.service-icon {
+.benefit-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
     display: block;
 }
 
-.service-card h3 {
+.benefit-card h3 {
     font-size: 1.5rem;
     font-weight: 600;
     color: #003366;
     margin-bottom: 1rem;
 }
 
-.service-card p {
+.benefit-card p {
     color: #666;
     line-height: 1.6;
 }
 
 /* News Section */
 .news {
-    background: #f8f9fa;
+    background: white;
 }
 
 .news-grid {
@@ -474,21 +500,58 @@ section {
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: #00C300;
+    background: #06C755;
     border-radius: 50%;
-    box-shadow: 0 4px 20px rgba(0, 195, 0, 0.4);
+    box-shadow: 0 4px 20px rgba(6, 199, 85, 0.4);
     transition: all 0.3s ease;
     text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
 }
 
 .line-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(0, 195, 0, 0.5);
+    box-shadow: 0 6px 25px rgba(6, 199, 85, 0.5);
 }
 
-.line-btn svg {
-    width: 32px;
-    height: 32px;
+.line-text {
+    font-family: Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.line-tooltip {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.line-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: #333;
+}
+
+.line-float:hover .line-tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 75px;
 }
 
 /* Animations */
@@ -550,7 +613,7 @@ section {
         font-size: 2rem;
     }
 
-    .services-grid {
+    .benefits-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
@@ -609,7 +672,7 @@ section {
         font-size: 1.8rem;
     }
 
-    .service-card {
+    .benefit-card {
         padding: 2rem 1.5rem;
     }
 

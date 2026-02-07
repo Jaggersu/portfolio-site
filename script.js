@@ -89,17 +89,18 @@ window.addEventListener('scroll', updateActiveNav);
 lineBtn.addEventListener('click', (e) => {
     e.preventDefault();
     // Placeholder - 將來可以替換為實際的 LINE 連結
+    // window.open('https://line.me/R/ti/p/@你的LINEID', '_blank');
     alert('LINE 客服功能將在設定完成後開放使用');
 });
 
-// Add loading animation to service cards and news items
+// Add loading animation to benefit cards and news items
 document.addEventListener('DOMContentLoaded', () => {
-    const serviceCards = document.querySelectorAll('.service-card');
+    const benefitCards = document.querySelectorAll('.benefit-card');
     const newsItems = document.querySelectorAll('.news-item');
     const contactItems = document.querySelectorAll('.contact-item');
 
-    // Stagger animation for service cards
-    serviceCards.forEach((card, index) => {
+    // Stagger animation for benefit cards
+    benefitCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add('loading');
         observer.observe(card);
@@ -133,8 +134,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add hover effect to service cards
-serviceCards.forEach(card => {
+// Add hover effect to benefit cards
+document.querySelectorAll('.benefit-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px) scale(1.02)';
     });
