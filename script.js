@@ -87,9 +87,34 @@ window.addEventListener('scroll', updateActiveNav);
 
 // LINE button functionality - 已設定實際連結，移除阻擋功能
 
-// Add loading animation to video section, benefit cards and news items
+// Accordion functionality for charter section
+function toggleAccordion(header) {
+    const content = header.nextElementSibling;
+    const allHeaders = document.querySelectorAll('.accordion-header');
+    const allContents = document.querySelectorAll('.accordion-content');
+    
+    // Close all other accordions
+    allHeaders.forEach(h => {
+        if (h !== header) {
+            h.classList.remove('active');
+        }
+    });
+    
+    allContents.forEach(c => {
+        if (c !== content) {
+            c.classList.remove('active');
+        }
+    });
+    
+    // Toggle current accordion
+    header.classList.toggle('active');
+    content.classList.toggle('active');
+}
+
+// Add loading animation to video section, charter section, benefit cards and news items
 document.addEventListener('DOMContentLoaded', () => {
     const videoSection = document.querySelector('.video-section');
+    const charterSection = document.querySelector('.charter-section');
     const benefitCards = document.querySelectorAll('.benefit-card');
     const newsItems = document.querySelectorAll('.news-item');
     const contactItems = document.querySelectorAll('.contact-item');
@@ -98,6 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (videoSection) {
         videoSection.classList.add('loading');
         observer.observe(videoSection);
+    }
+
+    // Observe charter section
+    if (charterSection) {
+        charterSection.classList.add('loading');
+        observer.observe(charterSection);
     }
 
     // Stagger animation for benefit cards
