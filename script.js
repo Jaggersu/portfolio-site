@@ -85,6 +85,96 @@ function updateActiveNav() {
 
 window.addEventListener('scroll', updateActiveNav);
 
+// Founder Recruitment Modal
+function showFounderModal() {
+    const modal = document.getElementById('founderModal');
+    modal.classList.add('active');
+    
+    // Animate progress bar
+    setTimeout(() => {
+        const progressFill = document.getElementById('progressFill');
+        progressFill.style.width = '40%'; // 12/30 = 40%
+        
+        // Animate numbers
+        animateProgress();
+    }, 500);
+}
+
+function closeFounderModal() {
+    const modal = document.getElementById('founderModal');
+    modal.classList.remove('active');
+    
+    // Set cookie to remember user closed it
+    setCookie('founderModalClosed', 'true', 1); // 1 day
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function animateProgress() {
+    const progressNumbers = document.getElementById('progressNumbers');
+    let currentNumber = 0;
+    const targetNumber = 12;
+    const increment = 1;
+    const duration = 1500; // 1.5 seconds
+    const stepTime = duration / targetNumber;
+    
+    const timer = setInterval(() => {
+        currentNumber += increment;
+        if (currentNumber >= targetNumber) {
+            currentNumber = targetNumber;
+            clearInterval(timer);
+        }
+        progressNumbers.textContent = `${currentNumber} / 30 人`;
+    }, stepTime);
+}
+
+// Check if modal should be shown
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user has closed the modal in the last 24 hours
+    const modalClosed = getCookie('founderModalClosed');
+    
+    if (!modalClosed) {
+        // Show modal after 3 seconds
+        setTimeout(() => {
+            showFounderModal();
+        }, 3000);
+    }
+    
+    // Close modal when clicking on background
+    const modalOverlay = document.getElementById('founderModal');
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeFounderModal();
+        }
+    });
+    
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('founderModal');
+            if (modal.classList.contains('active')) {
+                closeFounderModal();
+            }
+        }
+    });
+});
+
 // LINE button functionality - 已設定實際連結，移除阻擋功能
 
 // Accordion functionality for charter section
