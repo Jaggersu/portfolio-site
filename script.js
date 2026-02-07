@@ -85,13 +85,7 @@ function updateActiveNav() {
 
 window.addEventListener('scroll', updateActiveNav);
 
-// LINE button placeholder functionality
-lineBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    // Placeholder - 將來可以替換為實際的 LINE 連結
-    // window.open('https://line.me/R/ti/p/@你的LINEID', '_blank');
-    alert('LINE 客服功能將在設定完成後開放使用');
-});
+// LINE button functionality - 已設定實際連結，移除阻擋功能
 
 // Add loading animation to benefit cards and news items
 document.addEventListener('DOMContentLoaded', () => {
