@@ -93,7 +93,7 @@ function showFounderModal() {
     // Animate progress bar
     setTimeout(() => {
         const progressFill = document.getElementById('progressFill');
-        progressFill.style.width = '40%'; // 12/30 = 40%
+        progressFill.style.width = '33.33%'; // 10/30 = 33.33%
         
         // Animate numbers
         animateProgress();
@@ -129,7 +129,7 @@ function getCookie(name) {
 function animateProgress() {
     const progressNumbers = document.getElementById('progressNumbers');
     let currentNumber = 0;
-    const targetNumber = 12;
+    const targetNumber = 10;
     const increment = 1;
     const duration = 1500; // 1.5 seconds
     const stepTime = duration / targetNumber;
