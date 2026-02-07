@@ -87,11 +87,18 @@ window.addEventListener('scroll', updateActiveNav);
 
 // LINE button functionality - 已設定實際連結，移除阻擋功能
 
-// Add loading animation to benefit cards and news items
+// Add loading animation to video section, benefit cards and news items
 document.addEventListener('DOMContentLoaded', () => {
+    const videoSection = document.querySelector('.video-section');
     const benefitCards = document.querySelectorAll('.benefit-card');
     const newsItems = document.querySelectorAll('.news-item');
     const contactItems = document.querySelectorAll('.contact-item');
+
+    // Observe video section
+    if (videoSection) {
+        videoSection.classList.add('loading');
+        observer.observe(videoSection);
+    }
 
     // Stagger animation for benefit cards
     benefitCards.forEach((card, index) => {
