@@ -143,16 +143,20 @@ body {
 
 .hot-badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -12px;
+    right: -12px;
     background: #ff4757;
     color: white;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 10px;
+    padding: 3px 6px;
+    border-radius: 12px;
     animation: pulse 2s infinite;
     box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+    z-index: 10;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1;
 }
 
 @keyframes pulse {
@@ -181,10 +185,11 @@ body {
     }
     
     .hot-badge {
-        font-size: 0.5rem;
-        padding: 1px 4px;
-        top: -6px;
-        right: -6px;
+        font-size: 0.55rem;
+        padding: 2px 5px;
+        top: -10px;
+        right: -10px;
+        min-width: 18px;
     }
 }
 
@@ -208,10 +213,11 @@ body {
     }
     
     .hot-badge {
-        font-size: 0.45rem;
-        padding: 1px 3px;
-        top: -5px;
-        right: -5px;
+        font-size: 0.5rem;
+        padding: 2px 4px;
+        top: -8px;
+        right: -8px;
+        min-width: 16px;
     }
 }
 
@@ -314,11 +320,116 @@ body {
     color: #003366;
     text-decoration: none;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    animation: fadeInUp 1s ease 0.4s both;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    margin-right: 15px;
+}
+
+.hero-buttons .founder-btn {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.hero-buttons .founder-btn-text {
+    font-size: 1rem;
+}
+
+.hero-buttons .founder-btn-limit {
+    font-size: 0.8rem;
+}
+
+.hero-buttons .hot-badge {
+    top: -10px;
+    right: -10px;
+    font-size: 0.6rem;
+}
+
+.hero-buttons {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+}
+
+.hero-buttons .founder-btn {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.hero-buttons .founder-btn-text {
+    font-size: 1rem;
+}
+
+.hero-buttons .founder-btn-limit {
+    font-size: 0.8rem;
+}
+
+.hero-buttons .hot-badge {
+    top: -10px;
+    right: -10px;
+    font-size: 0.6rem;
+}
+
+/* Hero Section Responsive */
+@media (max-width: 768px) {
+    .hero-buttons {
+        position: static;
+        transform: none;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .hero-btn {
+        margin-right: 0;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+    
+    .hero-buttons .founder-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-buttons {
+        gap: 12px;
+    }
+    
+    .hero-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    
+    .hero-buttons .founder-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-buttons .founder-btn-text {
+        font-size: 0.9rem;
+    }
+    
+    .hero-buttons .founder-btn-limit {
+        font-size: 0.7rem;
+    }
+    
+    .hero-buttons .hot-badge {
+        top: -8px;
+        right: -8px;
+        font-size: 0.5rem;
+    }
 }
 
 .hero-btn:hover {
