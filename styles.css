@@ -36,12 +36,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 180px;
+    height: 80px;
 }
 
 .nav-logo {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 .nav-logo h2 {
@@ -51,11 +52,20 @@ body {
 }
 
 .logo-img {
-    height: 150px;
+    height: 60px;
     width: auto;
     display: block;
     transition: all 0.3s ease;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo-text {
+    color: #FFD700;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .nav-menu {
