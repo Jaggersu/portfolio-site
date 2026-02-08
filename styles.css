@@ -85,6 +85,136 @@ body {
     letter-spacing: 2px;
 }
 
+/* Founder Button Styles */
+.founder-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+    color: #003366;
+    border: 2px solid #FFD700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.founder-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.founder-btn:hover::before {
+    left: 100%;
+}
+
+.founder-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, #FFC700 0%, #FFB700 100%);
+    border-color: #FFC700;
+}
+
+.founder-btn:active {
+    transform: translateY(0);
+}
+
+.founder-btn-text {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.founder-btn-limit {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.hot-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    animation: pulse 2s infinite;
+    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Responsive Founder Button */
+@media (max-width: 768px) {
+    .founder-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+        gap: 3px;
+    }
+    
+    .founder-btn-text {
+        font-size: 0.85rem;
+    }
+    
+    .founder-btn-limit {
+        font-size: 0.7rem;
+    }
+    
+    .hot-badge {
+        font-size: 0.5rem;
+        padding: 1px 4px;
+        top: -6px;
+        right: -6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    .founder-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        gap: 2px;
+    }
+    
+    .founder-btn-text {
+        font-size: 0.8rem;
+    }
+    
+    .founder-btn-limit {
+        font-size: 0.65rem;
+    }
+    
+    .hot-badge {
+        font-size: 0.45rem;
+        padding: 1px 3px;
+        top: -5px;
+        right: -5px;
+    }
+}
+
 .nav-menu {
     display: flex;
     list-style: none;

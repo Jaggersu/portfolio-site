@@ -100,6 +100,24 @@ function showFounderModal() {
     }, 500);
 }
 
+function forceShowFounderModal() {
+    // Force show modal regardless of cookie status
+    const modal = document.getElementById('founderModal');
+    modal.classList.add('active');
+    
+    // Reset progress animation
+    const progressFill = document.getElementById('progressFill');
+    progressFill.style.width = '0%';
+    
+    // Animate progress bar
+    setTimeout(() => {
+        progressFill.style.width = '33.33%'; // 10/30 = 33.33%
+        
+        // Animate numbers
+        animateProgress();
+    }, 500);
+}
+
 function closeFounderModal() {
     const modal = document.getElementById('founderModal');
     modal.classList.remove('active');
