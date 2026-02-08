@@ -42,7 +42,6 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 4px;
 }
 
 .nav-logo h2 {
@@ -52,18 +51,9 @@ body {
 }
 
 .logo-img {
-    height: 65px;
+    height: 55px;
     width: auto;
     display: block;
-    transition: all 0.3s ease;
-}
-
-.logo-text {
-    color: #FFD700;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-family: 'Arial', sans-serif;
     transition: all 0.3s ease;
 }
 
