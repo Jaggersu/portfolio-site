@@ -51,10 +51,11 @@ body {
 }
 
 .logo-img {
-    height: 55px;
+    height: 80px;
     width: auto;
     display: block;
     transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .nav-menu {
