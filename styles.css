@@ -141,24 +141,6 @@ body {
     opacity: 0.8;
 }
 
-.hot-badge {
-    position: absolute;
-    top: -12px;
-    right: -12px;
-    background: #ff4757;
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 3px 6px;
-    border-radius: 12px;
-    animation: pulse 2s infinite;
-    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
-    z-index: 10;
-    min-width: 20px;
-    text-align: center;
-    line-height: 1;
-}
-
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
@@ -183,14 +165,6 @@ body {
     .founder-btn-limit {
         font-size: 0.7rem;
     }
-    
-    .hot-badge {
-        font-size: 0.55rem;
-        padding: 2px 5px;
-        top: -10px;
-        right: -10px;
-        min-width: 18px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -210,14 +184,6 @@ body {
     
     .founder-btn-limit {
         font-size: 0.65rem;
-    }
-    
-    .hot-badge {
-        font-size: 0.5rem;
-        padding: 2px 4px;
-        top: -8px;
-        right: -8px;
-        min-width: 16px;
     }
 }
 
@@ -330,6 +296,7 @@ body {
     padding: 15px 25px;
     font-size: 1rem;
     margin: 0;
+    position: relative;
 }
 
 .hero-buttons .founder-btn-text {
@@ -338,12 +305,6 @@ body {
 
 .hero-buttons .founder-btn-limit {
     font-size: 0.8rem;
-}
-
-.hero-buttons .hot-badge {
-    top: -10px;
-    right: -10px;
-    font-size: 0.6rem;
 }
 
 .hero-buttons {
@@ -361,6 +322,7 @@ body {
     padding: 15px 25px;
     font-size: 1rem;
     margin: 0;
+    position: relative;
 }
 
 .hero-buttons .founder-btn-text {
@@ -369,12 +331,6 @@ body {
 
 .hero-buttons .founder-btn-limit {
     font-size: 0.8rem;
-}
-
-.hero-buttons .hot-badge {
-    top: -10px;
-    right: -10px;
-    font-size: 0.6rem;
 }
 
 /* Hero Section Responsive */
@@ -423,12 +379,6 @@ body {
     
     .hero-buttons .founder-btn-limit {
         font-size: 0.7rem;
-    }
-    
-    .hero-buttons .hot-badge {
-        top: -8px;
-        right: -8px;
-        font-size: 0.5rem;
     }
 }
 
