@@ -337,78 +337,120 @@ body {
 
 /* Hero Section Responsive */
 @media (max-width: 768px) {
-    .hero-buttons {
-        position: static !important;
-        transform: none !important;
-        flex-direction: row !important;
-        gap: 10px !important;
+    .hero {
+        display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-top: 20px !important;
-        flex-wrap: nowrap !important;
+        padding: 80px 20px 40px !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+    
+    .hero-content {
+        order: 1 !important;
+        margin-bottom: 30px !important;
+        text-align: center !important;
+    }
+    
+    .hero-buttons {
+        order: 2 !important;
+        position: static !important;
+        transform: none !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
         padding: 0 10px !important;
         display: flex !important;
+        width: 100% !important;
+        max-width: 400px !important;
     }
     
     .hero-btn {
         margin-right: 0 !important;
-        width: auto !important;
-        max-width: 140px !important;
+        width: 100% !important;
+        max-width: 300px !important;
         text-align: center !important;
-        padding: 10px 15px !important;
+        padding: 12px 20px !important;
         font-size: 0.9rem !important;
         flex-shrink: 0 !important;
     }
     
+    .hero-buttons .nav-btn.founder-btn,
     .hero-buttons .founder-btn {
-        width: auto !important;
-        max-width: 140px !important;
-        justify-content: center !important;
-        padding: 10px 12px !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        padding: 12px 15px !important;
         font-size: 0.8rem !important;
         gap: 2px !important;
+        justify-content: center !important;
         flex-shrink: 0 !important;
     }
     
-    .hero-buttons .founder-btn-text {
+    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero-buttons .founder-btn .founder-btn-text {
         font-size: 0.8rem !important;
     }
     
-    .hero-buttons .founder-btn-limit {
+    .hero-buttons .nav-btn.founder-btn .founder-btn-limit,
+    .hero-buttons .founder-btn .founder-btn-limit {
         display: none !important;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem !important;
+        margin-bottom: 1.5rem !important;
     }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: 80px 15px 40px !important;
+    }
+    
+    .hero-content {
+        margin-bottom: 25px !important;
+    }
+    
     .hero-buttons {
-        gap: 8px !important;
+        gap: 12px !important;
         padding: 0 10px !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        display: flex !important;
+        flex-direction: column !important;
+        max-width: 350px !important;
     }
     
     .hero-btn {
-        padding: 8px 12px !important;
-        font-size: 0.8rem !important;
-        max-width: 120px !important;
-        flex-shrink: 0 !important;
+        padding: 10px 18px !important;
+        font-size: 0.85rem !important;
+        max-width: 280px !important;
     }
     
+    .hero-buttons .nav-btn.founder-btn,
     .hero-buttons .founder-btn {
-        padding: 8px 10px !important;
+        padding: 10px 12px !important;
         font-size: 0.75rem !important;
-        max-width: 120px !important;
+        max-width: 280px !important;
         gap: 1px !important;
-        flex-shrink: 0 !important;
     }
     
-    .hero-buttons .founder-btn-text {
+    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero-buttons .founder-btn .founder-btn-text {
         font-size: 0.75rem !important;
     }
     
-    .hero-buttons .founder-btn-limit {
-        display: none !important;
+    .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem !important;
     }
 }
 
@@ -1542,95 +1584,4 @@ html {
 .loading.loaded {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Force Mobile Button Layout - Override Everything */
-@media (max-width: 768px) {
-    .hero .hero-buttons,
-    .hero-buttons {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 15px !important;
-        margin-top: 30px !important;
-        padding: 0 10px !important;
-        position: static !important;
-        transform: none !important;
-    }
-    
-    .hero .hero-buttons .hero-btn,
-    .hero-buttons .hero-btn,
-    .hero .hero-buttons .nav-btn.founder-btn,
-    .hero-buttons .nav-btn.founder-btn,
-    .hero .hero-buttons .founder-btn,
-    .hero-buttons .founder-btn {
-        width: 100% !important;
-        max-width: 300px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .hero .hero-buttons .hero-btn,
-    .hero-buttons .hero-btn {
-        padding: 12px 20px !important;
-        font-size: 0.9rem !important;
-        margin-right: 0 !important;
-    }
-    
-    .hero .hero-buttons .nav-btn.founder-btn,
-    .hero-buttons .nav-btn.founder-btn,
-    .hero .hero-buttons .founder-btn,
-    .hero-buttons .founder-btn {
-        padding: 12px 15px !important;
-        font-size: 0.8rem !important;
-        gap: 2px !important;
-        justify-content: center !important;
-    }
-    
-    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-text,
-    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
-    .hero .hero-buttons .founder-btn .founder-btn-text,
-    .hero-buttons .founder-btn .founder-btn-text {
-        font-size: 0.8rem !important;
-    }
-    
-    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-limit,
-    .hero-buttons .nav-btn.founder-btn .founder-btn-limit,
-    .hero .hero-buttons .founder-btn .founder-btn-limit,
-    .hero-buttons .founder-btn .founder-btn-limit {
-        display: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero .hero-buttons,
-    .hero-buttons {
-        gap: 12px !important;
-        padding: 0 10px !important;
-        margin-top: 25px !important;
-    }
-    
-    .hero .hero-buttons .hero-btn,
-    .hero-buttons .hero-btn {
-        padding: 10px 18px !important;
-        font-size: 0.85rem !important;
-        max-width: 280px !important;
-    }
-    
-    .hero .hero-buttons .nav-btn.founder-btn,
-    .hero-buttons .nav-btn.founder-btn,
-    .hero .hero-buttons .founder-btn,
-    .hero-buttons .founder-btn {
-        padding: 10px 12px !important;
-        font-size: 0.75rem !important;
-        max-width: 280px !important;
-        gap: 1px !important;
-    }
-    
-    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-text,
-    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
-    .hero .hero-buttons .founder-btn .founder-btn-text,
-    .hero-buttons .founder-btn .founder-btn-text {
-        font-size: 0.75rem !important;
-    }
 }
