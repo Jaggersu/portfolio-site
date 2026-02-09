@@ -4,6 +4,7 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const header = document.querySelector('.header');
 const lineBtn = document.getElementById('lineBtn');
+const logoLink = document.querySelector('.logo-link');
 
 // 檢查是否在表單頁面
 const isFormPage = window.location.pathname.includes('join-founder.html');
@@ -19,6 +20,19 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+    });
+});
+
+// Logo click to go to top of page
+logoLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Close mobile menu if open
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    // Scroll to top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 });
 

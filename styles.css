@@ -42,7 +42,47 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo-link:focus {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Mobile responsive for logo */
+@media (max-width: 768px) {
+    .logo-link {
+        gap: 10px;
+    }
+    
+    .logo-link:hover {
+        transform: scale(1.02);
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-link {
+        gap: 8px;
+    }
+    
+    .logo-link:hover {
+        transform: scale(1.01);
+    }
 }
 
 .nav-logo h2 {
