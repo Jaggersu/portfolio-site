@@ -338,68 +338,77 @@ body {
 /* Hero Section Responsive */
 @media (max-width: 768px) {
     .hero-buttons {
-        position: static;
-        transform: none;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-        flex-wrap: nowrap;
+        position: static !important;
+        transform: none !important;
+        flex-direction: row !important;
+        gap: 10px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-top: 20px !important;
+        flex-wrap: nowrap !important;
+        padding: 0 10px !important;
+        display: flex !important;
     }
     
     .hero-btn {
-        margin-right: 0;
-        width: auto;
-        max-width: 140px;
-        text-align: center;
-        padding: 10px 15px;
-        font-size: 0.9rem;
+        margin-right: 0 !important;
+        width: auto !important;
+        max-width: 140px !important;
+        text-align: center !important;
+        padding: 10px 15px !important;
+        font-size: 0.9rem !important;
+        flex-shrink: 0 !important;
     }
     
     .hero-buttons .founder-btn {
-        width: auto;
-        max-width: 140px;
-        justify-content: center;
-        padding: 10px 12px;
-        font-size: 0.8rem;
-        gap: 2px;
+        width: auto !important;
+        max-width: 140px !important;
+        justify-content: center !important;
+        padding: 10px 12px !important;
+        font-size: 0.8rem !important;
+        gap: 2px !important;
+        flex-shrink: 0 !important;
     }
     
     .hero-buttons .founder-btn-text {
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
     }
     
     .hero-buttons .founder-btn-limit {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (max-width: 480px) {
     .hero-buttons {
-        gap: 8px;
-        padding: 0 10px;
+        gap: 8px !important;
+        padding: 0 10px !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        display: flex !important;
     }
     
     .hero-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        max-width: 120px;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        max-width: 120px !important;
+        flex-shrink: 0 !important;
     }
     
     .hero-buttons .founder-btn {
-        padding: 8px 10px;
-        font-size: 0.75rem;
-        max-width: 120px;
-        gap: 1px;
+        padding: 8px 10px !important;
+        font-size: 0.75rem !important;
+        max-width: 120px !important;
+        gap: 1px !important;
+        flex-shrink: 0 !important;
     }
     
     .hero-buttons .founder-btn-text {
-        font-size: 0.75rem;
+        font-size: 0.75rem !important;
     }
     
     .hero-buttons .founder-btn-limit {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -1533,4 +1542,95 @@ html {
 .loading.loaded {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Force Mobile Button Layout - Override Everything */
+@media (max-width: 768px) {
+    .hero .hero-buttons,
+    .hero-buttons {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        margin-top: 20px !important;
+        padding: 0 10px !important;
+        flex-wrap: nowrap !important;
+        position: static !important;
+        transform: none !important;
+    }
+    
+    .hero .hero-buttons .hero-btn,
+    .hero-buttons .hero-btn,
+    .hero .hero-buttons .nav-btn.founder-btn,
+    .hero-buttons .nav-btn.founder-btn,
+    .hero .hero-buttons .founder-btn,
+    .hero-buttons .founder-btn {
+        width: auto !important;
+        max-width: 140px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .hero .hero-buttons .hero-btn,
+    .hero-buttons .hero-btn {
+        padding: 10px 15px !important;
+        font-size: 0.9rem !important;
+        margin-right: 0 !important;
+    }
+    
+    .hero .hero-buttons .nav-btn.founder-btn,
+    .hero-buttons .nav-btn.founder-btn,
+    .hero .hero-buttons .founder-btn,
+    .hero-buttons .founder-btn {
+        padding: 10px 12px !important;
+        font-size: 0.8rem !important;
+        gap: 2px !important;
+        justify-content: center !important;
+    }
+    
+    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero .hero-buttons .founder-btn .founder-btn-text,
+    .hero-buttons .founder-btn .founder-btn-text {
+        font-size: 0.8rem !important;
+    }
+    
+    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-limit,
+    .hero-buttons .nav-btn.founder-btn .founder-btn-limit,
+    .hero .hero-buttons .founder-btn .founder-btn-limit,
+    .hero-buttons .founder-btn .founder-btn-limit {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero .hero-buttons,
+    .hero-buttons {
+        gap: 8px !important;
+        padding: 0 10px !important;
+    }
+    
+    .hero .hero-buttons .hero-btn,
+    .hero-buttons .hero-btn {
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        max-width: 120px !important;
+    }
+    
+    .hero .hero-buttons .nav-btn.founder-btn,
+    .hero-buttons .nav-btn.founder-btn,
+    .hero .hero-buttons .founder-btn,
+    .hero-buttons .founder-btn {
+        padding: 8px 10px !important;
+        font-size: 0.75rem !important;
+        max-width: 120px !important;
+        gap: 1px !important;
+    }
+    
+    .hero .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero-buttons .nav-btn.founder-btn .founder-btn-text,
+    .hero .hero-buttons .founder-btn .founder-btn-text,
+    .hero-buttons .founder-btn .founder-btn-text {
+        font-size: 0.75rem !important;
+    }
 }
