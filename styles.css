@@ -261,6 +261,8 @@ body {
     z-index: 1;
     color: white;
     padding: 0 20px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .hero-title {
@@ -338,47 +340,66 @@ body {
     .hero-buttons {
         position: static;
         transform: none;
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 10px;
         align-items: center;
+        justify-content: center;
         margin-top: 20px;
+        flex-wrap: nowrap;
     }
     
     .hero-btn {
         margin-right: 0;
-        width: 100%;
-        max-width: 300px;
+        width: auto;
+        max-width: 140px;
         text-align: center;
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
     
     .hero-buttons .founder-btn {
-        width: 100%;
-        max-width: 300px;
+        width: auto;
+        max-width: 140px;
         justify-content: center;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        gap: 2px;
+    }
+    
+    .hero-buttons .founder-btn-text {
+        font-size: 0.8rem;
+    }
+    
+    .hero-buttons .founder-btn-limit {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
     .hero-buttons {
-        gap: 12px;
+        gap: 8px;
+        padding: 0 10px;
     }
     
     .hero-btn {
-        padding: 12px 30px;
-        font-size: 1rem;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        max-width: 120px;
     }
     
     .hero-buttons .founder-btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        padding: 8px 10px;
+        font-size: 0.75rem;
+        max-width: 120px;
+        gap: 1px;
     }
     
     .hero-buttons .founder-btn-text {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
     }
     
     .hero-buttons .founder-btn-limit {
-        font-size: 0.7rem;
+        display: none;
     }
 }
 
@@ -990,6 +1011,28 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .nav-container {
+        height: 70px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .nav-logo {
+        flex: 0 0 auto;
+    }
+    
+    .logo-img {
+        height: 50px;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem;
+    }
+    
+    .logo-text2 {
+        font-size: 0.7rem;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -1009,6 +1052,7 @@ section {
 
     .hamburger {
         display: flex;
+        flex: 0 0 auto;
     }
 
     .hamburger.active span:nth-child(2) {
@@ -1117,6 +1161,30 @@ section {
 }
 
 @media (max-width: 480px) {
+    .nav-container {
+        height: 60px;
+        padding: 0 15px;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+    
+    .logo-text {
+        font-size: 0.9rem;
+    }
+    
+    .logo-text2 {
+        font-size: 0.6rem;
+        margin-top: 3px;
+    }
+    
+    .hamburger span {
+        width: 20px;
+        height: 2px;
+        margin: 2px 0;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
