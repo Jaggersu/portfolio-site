@@ -458,8 +458,281 @@
             border: 1px solid rgba(0, 51, 102, 0.1);
         }
 
+        /* Progress Section */
+        .progress-section {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .progress-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .current-count {
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        .max-count {
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        .remaining-text {
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+
+        .remaining-count {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff8e53 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Benefit Section */
+        .benefit-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+        }
+
+        .benefit-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .benefit-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .benefit-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .original-price {
+            font-size: 0.9rem;
+            color: #ff4444;
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
+        .discount-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .discount-tag {
+            font-size: 0.8rem;
+            color: #ff6b6b;
+            font-weight: 600;
+            background: #ffe0e0;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .total-savings {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #003366 0%, #004080 100%);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .savings-label {
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .savings-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FFD700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .savings-unit {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            margin-left: 5px;
+        }
+
         /* Responsive Design for New Elements */
         @media (max-width: 768px) {
+            .progress-section {
+                margin-top: 20px;
+                padding: 15px;
+            }
+
+            .progress-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .progress-text {
+                font-size: 1rem;
+            }
+
+            .remaining-text {
+                font-size: 0.85rem;
+            }
+
+            .progress-bar-container {
+                height: 8px;
+            }
+
+            .benefit-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .benefit-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .benefit-items {
+                gap: 12px;
+            }
+
+            .benefit-item {
+                padding: 12px 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .benefit-label {
+                font-size: 0.9rem;
+            }
+
+            .benefit-price {
+                align-self: flex-end;
+            }
+
+            .original-price {
+                font-size: 0.8rem;
+            }
+
+            .discount-price {
+                font-size: 1.1rem;
+            }
+
+            .discount-tag {
+                font-size: 0.75rem;
+                padding: 1px 6px;
+            }
+
+            .total-savings {
+                padding: 15px;
+            }
+
+            .savings-label {
+                font-size: 0.9rem;
+            }
+
+            .savings-amount {
+                font-size: 2rem;
+            }
+
+            .savings-unit {
+                font-size: 1rem;
+            }
+
             .radio-group {
                 flex-direction: column;
                 gap: 10px;
@@ -499,6 +772,73 @@
         }
 
         @media (max-width: 480px) {
+            .progress-section {
+                padding: 12px;
+                margin-top: 15px;
+            }
+
+            .progress-text {
+                font-size: 0.9rem;
+            }
+
+            .remaining-text {
+                font-size: 0.8rem;
+            }
+
+            .progress-bar-container {
+                height: 6px;
+            }
+
+            .benefit-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .benefit-title {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .benefit-items {
+                gap: 10px;
+            }
+
+            .benefit-item {
+                padding: 10px 12px;
+            }
+
+            .benefit-label {
+                font-size: 0.85rem;
+            }
+
+            .original-price {
+                font-size: 0.75rem;
+            }
+
+            .discount-price {
+                font-size: 1rem;
+            }
+
+            .discount-tag {
+                font-size: 0.7rem;
+            }
+
+            .total-savings {
+                padding: 12px;
+            }
+
+            .savings-label {
+                font-size: 0.85rem;
+            }
+
+            .savings-amount {
+                font-size: 1.8rem;
+            }
+
+            .savings-unit {
+                font-size: 0.9rem;
+            }
+
             .agreement-section {
                 padding: 15px;
             }
@@ -557,6 +897,17 @@
         <div class="form-hero-content">
             <h1 class="form-title">桃園市保全職業工會 發起人暨入會申請書</h1>
             <p class="form-subtitle">感謝您成為捍衛權益的先鋒！填寫本表即視為同意擔任發起人，並於工會成立後自動轉為正式會員。</p>
+            
+            <!-- 發起人招募進度條 -->
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span class="progress-text">目前進度：<span class="current-count">12</span> / <span class="max-count">30</span> 人</span>
+                    <span class="remaining-text">(僅剩 <span class="remaining-count">18</span> 席)</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 40%"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -670,6 +1021,34 @@
                             </a>
                         </div>
                         <div class="line-hint">加入後請發個貼圖，我們才看得到您喔！</div>
+                    </div>
+
+                    <!-- 專屬優惠區塊 -->
+                    <div class="benefit-section">
+                        <h3 class="benefit-title">🎉 發起人專屬優惠</h3>
+                        <div class="benefit-items">
+                            <div class="benefit-item">
+                                <span class="benefit-label">入會費</span>
+                                <span class="benefit-price">
+                                    <del class="original-price">$500</del>
+                                    <span class="discount-price">$0</span>
+                                    <span class="discount-tag">(發起人減免)</span>
+                                </span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-label">首年常年費</span>
+                                <span class="benefit-price">
+                                    <del class="original-price">$2,160</del>
+                                    <span class="discount-price">$0</span>
+                                    <span class="discount-tag">(創會元老福利)</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="total-savings">
+                            <span class="savings-label">總計現省：</span>
+                            <span class="savings-amount">$2,660</span>
+                            <span class="savings-unit">元</span>
+                        </div>
                     </div>
 
                     <!-- 法律聲明與個資同意 -->
