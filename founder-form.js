@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
-        // 驗證電話
+        // 驗證電話 (台灣手機號碼格式：09xxxxxxxx 或 +886-9xxxxxxxx)
         const phone = document.getElementById('phone');
-        const phoneRegex = /^[\d\-\+\(\)\s]+$/;
+        const phoneRegex = /^(09\d{8}|\+886-?\s?9\d{8})$/;
         if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
             phone.classList.add('error');
             document.getElementById('phoneError').style.display = 'block';
@@ -85,14 +85,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 送出表單
     async function submitForm(formData) {
-        const API_URL = 'https://script.google.com/macros/s/AKfycbz4ajM6fNpvCCKHnGl87K7pAZtAgQg9iceQh9OKTmNYKR7ZpTMzpwFScrh14y7OsBNO/exec';
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzd0j6hHqQJ8kocguXluFJYO_6zYNzwSqLWp8vDQduBXeCv_YPWfsh7x52Vjw9k8TZJ/exec';
         
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Google Apps Script 需要 no-cors 模式
+                mode: 'no-cors', // 避免 CORS 錯誤
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'text/plain', // 使用 text/plain 確保 GAS 能正確接收
                 },
                 body: JSON.stringify(formData)
             });
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById('phone').addEventListener('blur', function() {
-        const phoneRegex = /^[\d\-\+\(\)\s]+$/;
+        const phoneRegex = /^(09\d{8}|\+886-?\s?9\d{8})$/;
         if (this.value.trim() && phoneRegex.test(this.value)) {
             this.classList.remove('error');
             document.getElementById('phoneError').style.display = 'none';

@@ -53,7 +53,7 @@ security-union-website/
 
 **API 網址：**
 ```
-https://script.google.com/macros/s/AKfycbz4ajM6fNpvCCKHnGl87K7pAZtAgQg9iceQh9OKTmNYKR7ZpTMzpwFScrh14y7OsBNO/exec
+https://script.google.com/macros/s/AKfycbzd0j6hHqQJ8kocguXluFJYO_6zYNzwSqLWp8vDQduBXeCv_YPWfsh7x52Vjw9k8TZJ/exec
 ```
 
 **傳送格式：**
