@@ -5,6 +5,9 @@ const navLinks = document.querySelectorAll('.nav-link');
 const header = document.querySelector('.header');
 const lineBtn = document.getElementById('lineBtn');
 
+// 檢查是否在表單頁面
+const isFormPage = window.location.pathname.includes('join-founder.html');
+
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -19,71 +22,79 @@ navLinks.forEach(link => {
     });
 });
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(0, 51, 102, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 51, 102, 0.1)';
-    } else {
-        header.style.background = 'rgba(0, 51, 102, 0.95)';
-        header.style.boxShadow = 'none';
-    }
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 70; // Account for fixed header
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('loaded');
-        }
-    });
-}, observerOptions);
-
-// Observe all sections
-document.querySelectorAll('section').forEach(section => {
-    section.classList.add('loading');
-    observer.observe(section);
-});
-
-// Active navigation highlighting
-function updateActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            navLink?.classList.add('active');
+// Header scroll effect (僅在非表單頁面執行)
+if (!isFormPage) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(0, 51, 102, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0, 51, 102, 0.1)';
+        } else {
+            header.style.background = 'rgba(0, 51, 102, 0.95)';
+            header.style.boxShadow = 'none';
         }
     });
 }
 
-window.addEventListener('scroll', updateActiveNav);
+// Smooth scrolling for anchor links (僅在非表單頁面執行)
+if (!isFormPage) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 70; // Account for fixed header
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Intersection Observer for fade-in animations (僅在非表單頁面執行)
+if (!isFormPage) {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('loaded');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('loading');
+        observer.observe(section);
+    });
+}
+
+// Active navigation highlighting (僅在非表單頁面執行)
+if (!isFormPage) {
+    function updateActiveNav() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                navLink?.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+}
 
 // Founder Recruitment Modal
 function showFounderModal() {
@@ -162,36 +173,40 @@ function animateProgress() {
     }, stepTime);
 }
 
-// Check if modal should be shown
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if user has closed the modal in the last 24 hours
-    const modalClosed = getCookie('founderModalClosed');
-    
-    if (!modalClosed) {
-        // Show modal after 3 seconds
-        setTimeout(() => {
-            showFounderModal();
-        }, 3000);
-    }
-    
-    // Close modal when clicking on background
-    const modalOverlay = document.getElementById('founderModal');
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-            closeFounderModal();
+// Check if modal should be shown (僅在非表單頁面執行)
+if (!isFormPage) {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if user has closed the modal in the last 24 hours
+        const modalClosed = getCookie('founderModalClosed');
+        
+        if (!modalClosed) {
+            // Show modal after 3 seconds
+            setTimeout(() => {
+                showFounderModal();
+            }, 3000);
+        }
+        
+        // Close modal when clicking on background
+        const modalOverlay = document.getElementById('founderModal');
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeFounderModal();
+                }
+            });
+            
+            // Close modal when pressing Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('founderModal');
+                    if (modal && modal.classList.contains('active')) {
+                        closeFounderModal();
+                    }
+                }
+            });
         }
     });
-    
-    // Close modal when pressing Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const modal = document.getElementById('founderModal');
-            if (modal.classList.contains('active')) {
-                closeFounderModal();
-            }
-        }
-    });
-});
+}
 
 // LINE button functionality - 已設定實際連結，移除阻擋功能
 
@@ -219,71 +234,77 @@ function toggleAccordion(header) {
     content.classList.toggle('active');
 }
 
-// Add loading animation to video section, charter section, benefit cards and news items
-document.addEventListener('DOMContentLoaded', () => {
-    const videoSection = document.querySelector('.video-section');
-    const charterSection = document.querySelector('.charter-section');
-    const benefitCards = document.querySelectorAll('.benefit-card');
-    const newsItems = document.querySelectorAll('.news-item');
-    const contactItems = document.querySelectorAll('.contact-item');
+// Add loading animation to video section, charter section, benefit cards and news items (僅在非表單頁面執行)
+if (!isFormPage) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const videoSection = document.querySelector('.video-section');
+        const charterSection = document.querySelector('.charter-section');
+        const benefitCards = document.querySelectorAll('.benefit-card');
+        const newsItems = document.querySelectorAll('.news-item');
+        const contactItems = document.querySelectorAll('.contact-item');
 
-    // Observe video section
-    if (videoSection) {
-        videoSection.classList.add('loading');
-        observer.observe(videoSection);
-    }
+        // Observe video section
+        if (videoSection) {
+            videoSection.classList.add('loading');
+            observer.observe(videoSection);
+        }
 
-    // Observe charter section
-    if (charterSection) {
-        charterSection.classList.add('loading');
-        observer.observe(charterSection);
-    }
+        // Observe charter section
+        if (charterSection) {
+            charterSection.classList.add('loading');
+            observer.observe(charterSection);
+        }
 
-    // Stagger animation for benefit cards
-    benefitCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('loading');
-        observer.observe(card);
+        // Stagger animation for benefit cards
+        benefitCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('loading');
+            observer.observe(card);
+        });
+
+        // Stagger animation for news items
+        newsItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+            item.classList.add('loading');
+            observer.observe(item);
+        });
+
+        // Stagger animation for contact items
+        contactItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+            item.classList.add('loading');
+            observer.observe(item);
+        });
     });
+}
 
-    // Stagger animation for news items
-    newsItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-        item.classList.add('loading');
-        observer.observe(item);
+// Parallax effect for hero section (僅在非表單頁面執行)
+if (!isFormPage) {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        const heroContent = document.querySelector('.hero-content');
+        
+        if (hero && heroContent) {
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            heroContent.style.opacity = 1 - scrolled / 600;
+        }
     });
+}
 
-    // Stagger animation for contact items
-    contactItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-        item.classList.add('loading');
-        observer.observe(item);
+// Add hover effect to benefit cards (僅在非表單頁面執行)
+if (!isFormPage) {
+    document.querySelectorAll('.benefit-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
     });
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    
-    if (hero && heroContent) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-        heroContent.style.opacity = 1 - scrolled / 600;
-    }
-});
-
-// Add hover effect to benefit cards
-document.querySelectorAll('.benefit-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
+}
 
 // Form validation (if contact form is added in the future)
 function validateForm(formData) {
@@ -331,14 +352,16 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// Initialize typing effect on page load
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle && window.innerWidth > 768) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 80);
-    }
-});
+// Initialize typing effect on page load (僅在非表單頁面執行)
+if (!isFormPage) {
+    window.addEventListener('load', () => {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && window.innerWidth > 768) {
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 80);
+        }
+    });
+}
 
 // Counter animation for statistics (if added in the future)
 function animateCounter(element, target, duration = 2000) {
