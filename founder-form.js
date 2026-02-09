@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const sameAddressCheckbox = document.getElementById('sameAddress');
     const registeredAddressInput = document.getElementById('registeredAddress');
     const mailingAddressInput = document.getElementById('mailingAddress');
+    const logoLink = document.querySelector('.logo-link');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
     
     // 地址複製功能
     function syncAddress() {
@@ -19,6 +22,30 @@ document.addEventListener('DOMContentLoaded', function() {
             mailingAddressInput.style.backgroundColor = 'white';
         }
     }
+    
+    // Mobile Navigation Toggle
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Logo click to go to home page
+    logoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Close mobile menu if open
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        // Navigate to home page
+        window.location.href = 'index.html';
+    });
     
     // 監聽地址複製 checkbox
     sameAddressCheckbox.addEventListener('change', syncAddress);
