@@ -190,7 +190,7 @@
                 <div class="trust-card">
                     <div class="trust-icon">💰</div>
                     <h3>公開透明的會費</h3>
-                    <p>入會費 $500 / 常年會費 $180<br><small>(依章程第18條)</small></p>
+                    <p>入會費 $500（一次性） / 常年 月會費 $180<br><small>(依章程第18條)</small></p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">🏛️</div>
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="step-card" onclick="alert('匯款帳號：銀行代碼 000，帳號 123456789\n\n匯款後請保留憑證，並透過LINE通知我們，謝謝！')">
+                    <div class="step-card" onclick="openPaymentModal()">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>繳納會費</h3>
@@ -457,6 +457,70 @@
         </div>
     </div>
 
+    <!-- 繳費彈跳視窗 -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-overlay" onclick="closePaymentModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            
+            <h2 class="modal-title">繳納入會費用</h2>
+            
+            <div class="payment-options">
+                <!-- 區塊 A：銀行轉帳 -->
+                <div class="payment-option">
+                    <div class="payment-header">
+                        <h3 class="payment-title">🏧 銀行轉帳 (籌備處專戶)</h3>
+                        <span class="payment-badge">建議使用</span>
+                    </div>
+                    <div class="payment-details">
+                        <div class="bank-info">
+                            <div class="bank-row">
+                                <span class="bank-label">銀行代碼：</span>
+                                <span class="bank-value">048 王道銀行</span>
+                            </div>
+                            <div class="bank-row">
+                                <span class="bank-label">帳號：</span>
+                                <div class="account-wrapper">
+                                    <span class="bank-value account-number" id="accountNumber">01000547399988</span>
+                                    <button class="copy-btn" onclick="copyAccountNumber()">
+                                        <i class="fas fa-copy"></i>
+                                        <span>複製帳號</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="amount-info">
+                            <p>入會費 $500（一次性） + 常年 月會費 $180<br>（發起人全免）</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 區塊 B：LINE Pay -->
+                <div class="payment-option">
+                    <div class="payment-header">
+                        <h3 class="payment-title">📲 LINE Pay 便利付</h3>
+                    </div>
+                    <div class="payment-details">
+                        <p class="line-pay-description">
+                            因 LINE Pay 個人收款條碼具有時效性，如欲使用 LINE Pay 繳款，請點擊下方按鈕加入官方 LINE，將由專人提供即時收款碼。
+                        </p>
+                        <button class="line-pay-btn" onclick="window.open('https://lin.ee/GbhKGWL', '_blank')">
+                            <i class="fab fa-line"></i>
+                            加入官方 LINE 索取收款碼
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部警語 -->
+            <div class="payment-notice">
+                <p>
+                    本帳戶為勞動局核准前之籌備處暫收專戶，所有款項將於工會正式成立後全數移交工會法人帳戶，並開立正式收據。
+                </p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Simple hover effect for founder progress card
         document.addEventListener('DOMContentLoaded', function() {
@@ -475,6 +539,56 @@
                     progressCard.style.opacity = '0';
                     progressCard.style.pointerEvents = 'none';
                 });
+            }
+        });
+
+        // Payment Modal Functions
+        function openPaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        }
+
+        // Copy Account Number Function
+        function copyAccountNumber() {
+            const accountNumber = document.getElementById('accountNumber').textContent;
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                // 顯示複製成功提示
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i><span>已複製！</span>';
+                copyBtn.style.background = '#4CAF50';
+                
+                // 2秒後恢復原狀
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('複製失敗:', err);
+                // 顯示複製失敗提示
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-exclamation"></i><span>複製失敗</span>';
+                copyBtn.style.background = '#f44336';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        // ESC 鍵關閉彈跳視窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePaymentModal();
             }
         });
     </script>
