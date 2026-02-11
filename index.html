@@ -46,13 +46,52 @@
             <h1 class="hero-title">桃園市保全人員的堅強後盾</h1>
             <p class="hero-subtitle">保障權益．提升技能．溫暖互助</p>
         </div>
-        <div class="hero-buttons">
-            <a href="#join-us" class="hero-btn">立即入會</a>
-            <a href="join-founder.html" class="nav-btn founder-btn">
-                <span class="founder-btn-text">成為發起人</span>
-                <span class="founder-btn-limit">(限額)</span>
+        
+        <!-- Hero Display Section -->
+        <div class="hero-display-wrapper">
+            <!-- Layer 1: YouTube Video -->
+            <div class="video-layer">
+                <iframe 
+                    id="youtubeVideo"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/Gk7syc7GQsA?enablejsapi=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <!-- Layer 2: Founder Progress Card (Hidden by default) -->
+            <div class="founder-progress-card">
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <h3 class="progress-title">創會發起人招募中！</h3>
+                        <div class="progress-savings">現省 $2,660 元</div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-info">
+                            <span class="progress-current">12/30</span>
+                            <span class="progress-remaining">(僅剩 18 席)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <div class="progress-percentage">40%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <div class="cta-button-wrapper">
+            <a href="join-founder.html" class="main-cta-btn">
+                <span class="cta-text">成為發起人</span>
+                <span class="cta-limit">(限額搶位)</span>
             </a>
         </div>
+        
         <div class="hero-overlay"></div>
     </section>
 
@@ -117,26 +156,7 @@
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section id="video" class="video-section">
-        <div class="container">
-            <h2 class="video-title">守護權益，從團結開始</h2>
-            <div class="video-container">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/Gk7syc7GQsA" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <p class="video-description">你是否也覺得在這行業中需要靠山、需要保護？這就是我們成立工會的理由。我們正在尋找 30 位創會發起人，缺你不可！</p>
-        </div>
-    </section>
-
-    <!-- Member Benefits Section -->
+    <!-- Benefits Section -->
     <section id="benefits" class="benefits">
         <div class="container">
             <h2 class="section-title">會員福利</h2>
@@ -437,6 +457,27 @@
         </div>
     </div>
 
+    <script>
+        // Simple hover effect for founder progress card
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButton = document.querySelector('.cta-button-wrapper');
+            const progressCard = document.querySelector('.founder-progress-card');
+            
+            if (ctaButton && progressCard) {
+                // Show card on hover
+                ctaButton.addEventListener('mouseenter', () => {
+                    progressCard.style.opacity = '1';
+                    progressCard.style.pointerEvents = 'all';
+                });
+                
+                // Hide card on mouse leave
+                ctaButton.addEventListener('mouseleave', () => {
+                    progressCard.style.opacity = '0';
+                    progressCard.style.pointerEvents = 'none';
+                });
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
