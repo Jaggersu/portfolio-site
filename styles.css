@@ -543,6 +543,128 @@ section {
     color: #555;
 }
 
+/* Roadmap Section */
+.roadmap-section {
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+.roadmap-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.roadmap-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #FFD700;
+    border-radius: 2px;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #FFD700 0%, #FFD700 25%, #ddd 25%, #ddd 100%);
+    z-index: 1;
+}
+
+.timeline-item {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+}
+
+.timeline-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    color: #999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item.active .timeline-icon {
+    border-color: #FFD700;
+    background: #FFD700;
+    color: #003366;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e1e5e9;
+    transition: all 0.3s ease;
+}
+
+.timeline-item.active .timeline-content {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: #FFD700;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+.timeline-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    background: #f0f0f0;
+    color: #999;
+}
+
+.timeline-item.active .timeline-status {
+    background: #FFD700;
+    color: #003366;
+}
+
+.timeline-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
 /* Video Section */
 .video-section {
     background: #f5f5f5;
@@ -1348,6 +1470,61 @@ section {
         width: 28px;
         height: 28px;
     }
+
+    /* Timeline Responsive */
+    .roadmap-section {
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+
+    .roadmap-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0;
+    }
+
+    .timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 30px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(to bottom, #FFD700 0%, #FFD700 25%, #ddd 25%, #ddd 100%);
+    }
+
+    .timeline-item {
+        text-align: left;
+        padding-left: 4rem;
+        position: relative;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .timeline-content {
+        padding: 1.2rem;
+    }
+
+    .timeline-title {
+        font-size: 1rem;
+    }
+
+    .timeline-description {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1405,6 +1582,33 @@ section {
 
     section {
         padding: 60px 0;
+    }
+
+    /* Timeline Small Screen Responsive */
+    .roadmap-title {
+        font-size: 1.3rem;
+    }
+
+    .timeline-item {
+        padding-left: 3.5rem;
+    }
+
+    .timeline-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    .timeline-content {
+        padding: 1rem;
+    }
+
+    .timeline-title {
+        font-size: 0.95rem;
+    }
+
+    .timeline-description {
+        font-size: 0.8rem;
     }
 }
 
