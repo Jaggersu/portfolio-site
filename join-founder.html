@@ -862,6 +862,55 @@
             .form-container {
                 padding: 25px 15px;
             }
+
+            /* Offline Assistance Styles */
+            .offline-assistance {
+                background: #f0f0f0;
+                border-radius: 15px;
+                padding: 30px;
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            .offline-title {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            .offline-description {
+                font-size: 1rem;
+                color: #666;
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+
+            .offline-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 28px;
+                background: white;
+                color: #666;
+                text-decoration: none;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                font-size: 1rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .offline-btn:hover {
+                background: #f8f9fa;
+                border-color: #999;
+                color: #333;
+                transform: translateY(-1px);
+            }
+
+            .line-icon {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -1074,6 +1123,16 @@
                         <span class="submit-text">送出申請</span>
                     </button>
                 </form>
+
+                <!-- 線下分流按鈕 -->
+                <div class="offline-assistance">
+                    <h3 class="offline-title">不會使用線上申請？</h3>
+                    <p class="offline-description">不習慣使用手機打字嗎？沒關係，我們有專人為您服務。</p>
+                    <a href="https://lin.ee/GbhKGWL" target="_blank" class="offline-btn">
+                        <span class="line-icon">💬</span>
+                        <span>聯絡我們辦理入會</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
