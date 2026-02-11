@@ -165,15 +165,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 顯示錯誤訊息
     function showError(message) {
+        const errorMessage = document.getElementById('errorMessage');
         errorMessage.textContent = '❌ ' + message;
         errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
     }
     
     // 顯示成功訊息
     function showSuccess() {
-        successMessage.style.display = 'block';
-        errorMessage.style.display = 'none';
+        // 隱藏表單容器
+        document.getElementById('application-form-container').style.display = 'none';
+        // 顯示成功訊息
+        document.getElementById('success-message').style.display = 'block';
+        // 滾動到頁面頂部
+        window.scrollTo(0, 0);
     }
     
     // 設置按鈕載入狀態
@@ -252,18 +256,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (success) {
                 // 顯示成功訊息
                 showSuccess();
-                
-                // 重置表單
-                form.reset();
-                
-                // 重置地址複製狀態
-                mailingAddressInput.readOnly = false;
-                mailingAddressInput.style.backgroundColor = 'white';
-                
-                // 3秒後導回首頁
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 3000);
             } else {
                 throw new Error('送出失敗');
             }

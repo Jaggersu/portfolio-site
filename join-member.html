@@ -355,6 +355,122 @@
             color: #333;
             transform: translateY(-1px);
 
+        .offline-btn:hover {
+            background: #f8f9fa;
+            border-color: #999;
+            color: #333;
+            transform: translateY(-1px);
+        }
+
+        /* Success Message Styles */
+        #success-message {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
+        }
+
+        .success-content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .success-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .success-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: #00C300;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 195, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .success-cta-btn:hover {
+            background: #00A000;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 195, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .line-icon {
+            font-size: 1.4rem;
+        }
+
+        /* Success Message Responsive Design */
+        @media (max-width: 768px) {
+            #success-message {
+                padding: 30px 15px;
+                margin: 20px 0;
+            }
+
+            .success-title {
+                font-size: 1.6rem;
+            }
+
+            .success-description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .success-cta-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+
+            .line-icon {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #success-message {
+                padding: 25px 12px;
+                margin: 15px 0;
+            }
+
+            .success-title {
+                font-size: 1.4rem;
+            }
+
+            .success-description {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .success-cta-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+                gap: 8px;
+            }
+
+            .line-icon {
+                font-size: 1.1rem;
+            }
+        }
+
     .form-title {
         font-size: 2rem;
     }
@@ -482,14 +598,25 @@
     <section class="form-section">
         <div class="container">
             <div class="form-container">
-                <div class="success-message" id="successMessage">
-                    🎉 感謝您的申請！我們會盡快與您聯繫。
-                </div>
-                <div class="error-message-container" id="errorMessage">
-                    ❌ 送出失敗，請檢查網路連線後重試。
+                <!-- 成功訊息區塊 -->
+                <div id="success-message" style="display: none;">
+                    <div class="success-content">
+                        <h2 class="success-title">✅ 步驟 1 線上申請已完成！</h2>
+                        <p class="success-description">您的資料已安全建檔。請執行 步驟 2 完成身分核對。</p>
+                        <a href="https://lin.ee/GbhKGWL" target="_blank" class="success-cta-btn">
+                            <span class="line-icon">💬</span>
+                            加入官方 LINE 傳送證件
+                        </a>
+                    </div>
                 </div>
 
-                <form id="memberForm">
+                <!-- 表單容器 -->
+                <div id="application-form-container">
+                    <div class="success-message" id="errorMessage">
+                        ❌ 送出失敗，請檢查網路連線後重試。
+                    </div>
+
+                    <form id="memberForm">
                     <!-- 基本資料 -->
                     <div class="form-group">
                         <label for="name" class="form-label">
@@ -622,6 +749,7 @@
                         <span>聯絡我們辦理入會</span>
                     </a>
                 </div>
+                </div> <!-- 關閉 application-form-container -->
             </div>
         </div>
     </section>
