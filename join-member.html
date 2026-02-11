@@ -13,7 +13,7 @@
         /* Form Page Specific Styles */
         .form-hero {
             background: linear-gradient(135deg, #003366 0%, #004080 100%);
-            padding: 120px 0 80px;
+            padding: 100px 0 60px;
             text-align: center;
             color: white;
             position: relative;
@@ -50,71 +50,8 @@
         .form-subtitle {
             font-size: 1.2rem;
             font-weight: 300;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             color: #FFD700;
-        }
-
-        /* Steps Flow */
-        .steps-flow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px 0;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .step-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            min-width: 120px;
-            position: relative;
-        }
-
-        .step-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 3px solid #FFD700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .step-item.active .step-icon {
-            background: #FFD700;
-            color: #003366;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .step-item.completed .step-icon {
-            background: #4CAF50;
-            border-color: #4CAF50;
-        }
-
-        .step-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 5px;
-        }
-
-        .step-description {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .step-arrow {
-            color: #FFD700;
-            font-size: 1.5rem;
-            margin: 0 -10px;
-            z-index: 1;
         }
 
         .form-section {
@@ -417,154 +354,74 @@
             border-color: #999;
             color: #333;
             transform: translateY(-1px);
-        }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .form-hero {
-                padding: 100px 0 60px;
-            }
+    .form-title {
+        font-size: 2rem;
+    }
 
-            .form-title {
-                font-size: 2rem;
-            }
+    .form-subtitle {
+        font-size: 1rem;
+    }
 
-            .form-subtitle {
-                font-size: 1rem;
-            }
+    .form-container {
+        padding: 30px 20px;
+    }
 
-            .steps-flow {
-                gap: 15px;
-                margin: 30px 0;
-            }
+    .offline-assistance {
+        padding: 20px;
+        margin-top: 30px;
+    }
 
-            .step-item {
-                min-width: 100px;
-            }
+    .offline-title {
+        font-size: 1.1rem;
+    }
 
-            .step-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
+    .offline-description {
+        font-size: 0.9rem;
+    }
 
-            .step-title {
-                font-size: 0.8rem;
-            }
+    .offline-btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
 
-            .step-description {
-                font-size: 0.7rem;
-            }
+@media (max-width: 480px) {
+    .form-hero {
+        padding: 60px 0 30px;
+    }
 
-            .step-arrow {
-                font-size: 1.2rem;
-                margin: 0 -5px;
-            }
+    .form-title {
+        font-size: 1.8rem;
+    }
 
-            .radio-group {
-                flex-direction: column;
-                gap: 10px;
-            }
+    .form-subtitle {
+        font-size: 0.9rem;
+    }
 
-            .agreement-section {
-                padding: 20px;
-                margin: 20px 0;
-            }
+    .form-container {
+        padding: 25px 15px;
+    }
 
-            .agreement-title {
-                font-size: 1rem;
-            }
+    .offline-assistance {
+        padding: 15px;
+        margin-top: 20px;
+    }
 
-            .agreement-content p {
-                font-size: 0.8rem;
-            }
+    .offline-title {
+        font-size: 1rem;
+    }
 
-            .agreement-checkbox {
-                padding: 12px;
-            }
+    .offline-description {
+        font-size: 0.85rem;
+    }
 
-            .agreement-checkbox .checkbox-text {
-                font-size: 0.85rem;
-            }
-
-            .checkbox-group label {
-                font-size: 0.85rem;
-                margin-left: 0;
-                margin-top: 8px;
-                display: block;
-            }
-
-            .form-container {
-                padding: 30px 20px;
-            }
-
-            .offline-assistance {
-                padding: 20px;
-                margin-top: 30px;
-            }
-
-            .offline-title {
-                font-size: 1.1rem;
-            }
-
-            .offline-description {
-                font-size: 0.9rem;
-            }
-
-            .offline-btn {
-                padding: 12px 24px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .steps-flow {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .step-arrow {
-                transform: rotate(90deg);
-                margin: 5px 0;
-            }
-
-            .form-hero {
-                padding: 80px 0 40px;
-            }
-
-            .form-title {
-                font-size: 1.8rem;
-            }
-
-            .form-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .agreement-section {
-                padding: 15px;
-            }
-
-            .agreement-title {
-                font-size: 0.95rem;
-            }
-
-            .agreement-content p {
-                font-size: 0.75rem;
-            }
-
-            .agreement-checkbox {
-                padding: 10px;
-            }
-
-            .agreement-checkbox .checkbox-text {
-                font-size: 0.8rem;
-            }
-
-            .form-container {
-                padding: 25px 15px;
-            }
-
-            .offline-assistance {
+    .offline-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+}
+</style>
                 padding: 15px;
                 margin-top: 20px;
             }
@@ -618,27 +475,6 @@
         <div class="form-hero-content">
             <h1 class="form-title">桃園市保全職業工會 正式入會申請書</h1>
             <p class="form-subtitle">歡迎加入我們的大家庭！填寫申請書，享受完整的會員權益與保障。</p>
-            
-            <!-- 步驟流程圖 -->
-            <div class="steps-flow">
-                <div class="step-item active">
-                    <div class="step-icon">📝</div>
-                    <div class="step-title">線上填表</div>
-                    <div class="step-description">目前步驟</div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step-item">
-                    <div class="step-icon">💬</div>
-                    <div class="step-title">加入 LINE</div>
-                    <div class="step-description">傳送身分證</div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step-item">
-                    <div class="step-icon">✅</div>
-                    <div class="step-title">審核開通</div>
-                    <div class="step-description">完成入會</div>
-                </div>
-            </div>
         </div>
     </section>
 

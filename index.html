@@ -27,7 +27,7 @@
                 <ul class="nav-menu">
                     <li><a href="#about" class="nav-link">關於我們</a></li>
                     <li><a href="#benefits" class="nav-link">會員福利</a></li>
-                    <li><a href="join-member.html" class="nav-link">入會申請</a></li>
+                    <li><a href="#join-us" class="nav-link">入會申請</a></li>
                     <li><a href="#contact" class="nav-link">聯絡我們</a></li>
                 </ul>
                 <div class="hamburger">
@@ -46,7 +46,7 @@
             <p class="hero-subtitle">保障權益．提升技能．溫暖互助</p>
         </div>
         <div class="hero-buttons">
-            <a href="join-member.html" class="hero-btn">立即入會</a>
+            <a href="#join-us" class="hero-btn">立即入會</a>
             <a href="join-founder.html" class="nav-btn founder-btn">
                 <span class="founder-btn-text">成為發起人</span>
                 <span class="founder-btn-limit">(限額)</span>
@@ -247,23 +247,41 @@
     </section>
 
     <!-- Join Section -->
-    <section id="join" class="join">
+    <section id="join-us" class="join">
         <div class="container">
             <h2 class="section-title">加入我們</h2>
             <div class="join-content">
                 <p>立即加入桃園市保全人員職業工會，與我們一同為保全人員的權益奮鬥！</p>
                 <div class="join-steps">
-                    <div class="step">
+                    <div class="step-card" onclick="window.location.href='join-member.html'">
                         <div class="step-number">1</div>
-                        <p>填寫入會申請表</p>
+                        <div class="step-content">
+                            <h3>填寫入會申請表</h3>
+                            <p>完成線上申請表單，提供基本資料</p>
+                            <div class="step-action">
+                                <span class="click-hint">👆 點擊前往</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="step">
+                    <div class="step-card" onclick="window.open('https://lin.ee/GbhKGWL', '_blank')">
                         <div class="step-number">2</div>
-                        <p>準備相關證件</p>
+                        <div class="step-content">
+                            <h3>加入LINE傳證件</h3>
+                            <p>加入官方LINE，傳送身分證件完成審核</p>
+                            <div class="step-action">
+                                <span class="click-hint">👆 點擊加入</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="step">
+                    <div class="step-card" onclick="alert('匯款帳號：銀行代碼 000，帳號 123456789\n\n匯款後請保留憑證，並透過LINE通知我們，謝謝！')">
                         <div class="step-number">3</div>
-                        <p>繳納會費完成入會</p>
+                        <div class="step-content">
+                            <h3>繳納會費</h3>
+                            <p>繳交年費完成入會手續</p>
+                            <div class="step-action">
+                                <span class="click-hint">👆 點擊查看帳號</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <a href="#contact" class="join-btn">聯絡我們辦理入會</a>
@@ -316,7 +334,7 @@
                     <ul>
                         <li><a href="#about">關於我們</a></li>
                         <li><a href="#benefits">會員福利</a></li>
-                        <li><a href="join-member.html">入會申請</a></li>
+                        <li><a href="#join-us">入會申請</a></li>
                         <li><a href="#contact">聯絡我們</a></li>
                     </ul>
                 </div>
