@@ -300,6 +300,7 @@ body {
 .hero-content {
     text-align: center;
     margin-bottom: 1.5rem;
+    margin-top: 10px;
     z-index: 2;
     color: white;
     animation: fadeInUp 1s ease;
