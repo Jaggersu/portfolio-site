@@ -1481,6 +1481,7 @@ section {
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 51, 102, 0.1);
     transition: all 0.3s ease;
+    cursor: pointer;
     border-left: 4px solid #003366;
 }
 
