@@ -2065,3 +2065,190 @@ html {
         }
     }
 }
+
+/* Steps Flow Styles */
+.steps-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 120px;
+    position: relative;
+}
+
+.step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid #FFD700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.step-item.active .step-icon {
+    background: #FFD700;
+    color: #003366;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.step-item.completed .step-icon {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.step-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.step-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.step-arrow {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin: 0 -10px;
+    z-index: 1;
+}
+
+/* Offline Assistance Section */
+.offline-assistance {
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.offline-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.offline-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.offline-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: white;
+    color: #666;
+    text-decoration: none;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.offline-btn:hover {
+    background: #f8f9fa;
+    border-color: #999;
+    color: #333;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design for Steps Flow */
+@media (max-width: 768px) {
+    .steps-flow {
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .step-item {
+        min-width: 100px;
+    }
+
+    .step-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .step-title {
+        font-size: 0.8rem;
+    }
+
+    .step-description {
+        font-size: 0.7rem;
+    }
+
+    .step-arrow {
+        font-size: 1.2rem;
+        margin: 0 -5px;
+    }
+
+    .offline-assistance {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .offline-title {
+        font-size: 1.1rem;
+    }
+
+    .offline-description {
+        font-size: 0.9rem;
+    }
+
+    .offline-btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .steps-flow {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 5px 0;
+    }
+
+    .offline-assistance {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .offline-title {
+        font-size: 1rem;
+    }
+
+    .offline-description {
+        font-size: 0.85rem;
+    }
+
+    .offline-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+}
