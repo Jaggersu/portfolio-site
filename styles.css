@@ -3426,3 +3426,375 @@ html {
         font-size: 0.85rem;
     }
 }
+
+/* ===================================
+   創會發起人彈跳視窗樣式
+   =================================== */
+
+/* 基礎 Modal 覆蓋層 */
+#founderModal.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+/* 創會發起人專用 Modal 內容 */
+.founder-modal {
+    background: linear-gradient(135deg, #ffffff 0%, #fff9e6 100%);
+    border-radius: 24px;
+    max-width: 520px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    border: 2px solid #FFD700;
+    animation: slideUp 0.4s ease;
+    position: relative;
+}
+
+/* Modal Header */
+.founder-modal .modal-header {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #8B0000;
+    text-align: center;
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 22px 22px 0 0;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.founder-modal .modal-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.3;
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+/* 關閉按鈕 */
+.founder-modal .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8B0000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.founder-modal .modal-close:hover {
+    background: #fff;
+    transform: rotate(90deg);
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+}
+
+/* Modal Body */
+.founder-modal .modal-body {
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+/* 進度提示 */
+.progress-notice {
+    margin-bottom: 2rem;
+}
+
+.progress-notice p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.highlight-red {
+    color: #DC143C;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 福利清單 */
+.benefits-list {
+    margin: 2.5rem 0;
+    text-align: left;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #fff8dc 0%, #fffacd 100%);
+    border-radius: 12px;
+    border-left: 4px solid #FFD700;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.benefit-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    min-width: 30px;
+}
+
+.benefit-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 總節省金額 */
+.total-savings {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(220, 20, 60, 0.3);
+}
+
+.total-savings p {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.savings-amount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 說明文字 */
+.explanation-text {
+    margin-top: 2rem;
+}
+
+.explanation-text p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Modal Footer */
+.founder-modal .modal-footer {
+    padding: 0 2rem 2rem;
+}
+
+/* 主行動按鈕 */
+.modal-action-btn {
+    display: block;
+    width: 100%;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, #003366 0%, #004080 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(0, 51, 102, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.modal-action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(0, 51, 102, 0.5);
+    background: linear-gradient(135deg, #004080 0%, #0050a0 100%);
+}
+
+.modal-action-btn:hover::before {
+    left: 100%;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .founder-modal {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .founder-modal .modal-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+    
+    .founder-modal .modal-title {
+        font-size: 1.6rem;
+    }
+    
+    .founder-modal .modal-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .progress-notice p {
+        font-size: 1.1rem;
+    }
+    
+    .highlight-red {
+        font-size: 1.3rem;
+    }
+    
+    .benefit-item {
+        margin-bottom: 1rem;
+        padding: 0.8rem;
+    }
+    
+    .benefit-text {
+        font-size: 1rem;
+    }
+    
+    .total-savings {
+        margin: 2rem 0;
+        padding: 1.2rem;
+    }
+    
+    .total-savings p {
+        font-size: 1.1rem;
+    }
+    
+    .savings-amount {
+        font-size: 1.6rem;
+    }
+    
+    .modal-action-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .founder-modal .modal-footer {
+        padding: 0 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .founder-modal {
+        width: 98%;
+        margin: 0.5rem;
+    }
+    
+    .founder-modal .modal-header {
+        padding: 1.5rem 1rem 1rem;
+    }
+    
+    .founder-modal .modal-title {
+        font-size: 1.4rem;
+    }
+    
+    .founder-modal .modal-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .progress-notice p {
+        font-size: 1rem;
+    }
+    
+    .highlight-red {
+        font-size: 1.2rem;
+    }
+    
+    .benefit-item {
+        padding: 0.6rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .benefit-icon {
+        font-size: 1.2rem;
+        margin-right: 0.8rem;
+    }
+    
+    .benefit-text {
+        font-size: 0.9rem;
+    }
+    
+    .total-savings {
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+    
+    .total-savings p {
+        font-size: 1rem;
+    }
+    
+    .savings-amount {
+        font-size: 1.4rem;
+    }
+    
+    .explanation-text p {
+        font-size: 0.9rem;
+    }
+    
+    .modal-action-btn {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .founder-modal .modal-footer {
+        padding: 0 1rem 1rem;
+    }
+    
+    .founder-modal .modal-close {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+        top: 10px;
+        right: 10px;
+    }
+}

@@ -86,7 +86,7 @@
         
         <!-- CTA Button -->
         <div class="cta-button-wrapper">
-            <a href="join-founder.html" class="main-cta-btn">
+            <a href="#" class="main-cta-btn" onclick="openFounderModal(event)">
                 <span class="cta-text">成為發起人</span>
                 <span class="cta-limit">(限額搶位)</span>
             </a>
@@ -426,6 +426,54 @@
             <span class="line-text">LINE</span>
         </a>
         <div class="line-tooltip">官方 LINE 客服</div>
+    </div>
+
+    <!-- 創會發起人招募彈跳視窗 -->
+    <div id="founderModal" class="modal-overlay">
+        <div class="modal-content founder-modal">
+            <!-- Header -->
+            <div class="modal-header">
+                <span class="modal-close" onclick="closeFounderModal()">&times;</span>
+                <h2 class="modal-title">🔥 創會發起人．最後召集令</h2>
+            </div>
+            
+            <!-- Body -->
+            <div class="modal-body">
+                <div class="progress-notice">
+                    <p>距離向勞動局送件，僅剩最後 <strong class="highlight-red">18</strong> 席！</p>
+                </div>
+                
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✅</span>
+                        <span class="benefit-text">免入會費 (現省 $500)</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✅</span>
+                        <span class="benefit-text">免首年常年費 (現省 $2,160)</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🏆</span>
+                        <span class="benefit-text">獲頒「創會元老」榮譽證書</span>
+                    </div>
+                </div>
+                
+                <div class="total-savings">
+                    <p>總共現省 <span class="savings-amount">$2,660</span> 元！</p>
+                </div>
+                
+                <div class="explanation-text">
+                    <p>發起人僅需填寫連署書，無須先繳費。請把握改變保全環境的機會！</p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="modal-footer">
+                <a href="join-founder.html" class="modal-action-btn">
+                    立即填寫連署書 (免費)
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- 繳費彈跳視窗 -->

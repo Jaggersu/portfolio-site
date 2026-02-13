@@ -113,6 +113,42 @@ if (!isFormPage) {
 
 // LINE button functionality - 已設定實際連結，移除阻擋功能
 
+// Founder Modal Functions
+function openFounderModal(event) {
+    event.preventDefault();
+    const modal = document.getElementById('founderModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // 防止背景滾動
+}
+
+function closeFounderModal() {
+    const modal = document.getElementById('founderModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // 恢復背景滾動
+}
+
+// Close modal when clicking on background
+document.addEventListener('DOMContentLoaded', () => {
+    const modalOverlay = document.getElementById('founderModal');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeFounderModal();
+            }
+        });
+        
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('founderModal');
+                if (modal && modal.style.display === 'flex') {
+                    closeFounderModal();
+                }
+            }
+        });
+    }
+});
+
 // Accordion functionality for charter section
 function toggleAccordion(header) {
     const content = header.nextElementSibling;
