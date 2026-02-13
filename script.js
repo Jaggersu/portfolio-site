@@ -146,6 +146,9 @@ function forceShowFounderModal() {
 function closeFounderModal() {
     const modal = document.getElementById('founderModal');
     modal.classList.remove('active');
+    
+    // Set cookie to remember user closed it
+    setCookie('founderModalClosed', 'true', 1); // 1 day
 }
 
 function setCookie(name, value, days) {
@@ -187,10 +190,15 @@ function animateProgress() {
 // Check if modal should be shown (僅在非表單頁面執行)
 if (!isFormPage) {
     document.addEventListener('DOMContentLoaded', () => {
-        // Show modal after 3 seconds
-        setTimeout(() => {
-            showFounderModal();
-        }, 3000);
+        // Check if user has closed the modal in the last 24 hours
+        const modalClosed = getCookie('founderModalClosed');
+        
+        if (!modalClosed) {
+            // Show modal after 3 seconds
+            setTimeout(() => {
+                showFounderModal();
+            }, 3000);
+        }
         
         // Close modal when clicking on background
         const modalOverlay = document.getElementById('founderModal');
