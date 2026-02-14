@@ -181,21 +181,6 @@ if (!isFormPage) {
     });
 }
 
-// Parallax effect for hero section (僅在非表單頁面執行)
-if (!isFormPage) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (hero && heroContent) {
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            heroContent.style.opacity = 1 - scrolled / 600;
-        }
-    });
-}
-
 // Add hover effect to benefit cards (僅在非表單頁面執行)
 if (!isFormPage) {
     document.querySelectorAll('.benefit-card').forEach(card => {

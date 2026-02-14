@@ -832,12 +832,8 @@ body {
     transform: translateX(100%);
 }
 
-/* Fixed CTA Section */
+/* CTA Section */
 .fixed-cta {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
     text-align: center;
     z-index: 10;
 }
@@ -916,10 +912,6 @@ body {
 }
 
 .hero-buttons {
-    position: absolute;
-    bottom: 120px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 20px;
