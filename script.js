@@ -334,3 +334,30 @@ createBackToTopButton();
 // Console welcome message
 console.log('%c桃園市保全人員職業工會', 'color: #003366; font-size: 20px; font-weight: bold;');
 console.log('%c保障權益．提升技能．溫暖互助', 'color: #FFD700; font-size: 14px;');
+
+// 網頁載入完成後自動顯示宣傳彈跳視窗 (每次 reload 都會顯示)
+document.addEventListener('DOMContentLoaded', function() {
+  const promoModal = document.getElementById('autoPromoModal');
+  const closeBtn = document.querySelector('.promo-close-btn');
+  
+  if (promoModal) {
+    // 延遲 0.5 秒後彈出，讓視覺效果更好
+    setTimeout(() => {
+      promoModal.style.display = 'flex';
+    }, 500);
+
+    // 點擊 X 關閉
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        promoModal.style.display = 'none';
+      });
+    }
+    
+    // 點擊遮罩背景關閉
+    window.addEventListener('click', function(event) {
+      if (event.target === promoModal) {
+        promoModal.style.display = 'none';
+      }
+    });
+  }
+});
