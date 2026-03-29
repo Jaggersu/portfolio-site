@@ -57,10 +57,11 @@ export default async function HomePage() {
         <AuthButtons session={session} />
       </div>
       
-      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
+      {/* Layer 2: Hero Section - Full Screen */}
       <div
-        className="fixed inset-0 z-10 flex items-center justify-center"
+        className="relative z-10 flex items-center justify-center"
         style={{
+          height: '100vh',
           backgroundColor: '#CECECE',
           backgroundImage: `repeating-linear-gradient(
             0deg,
@@ -92,8 +93,8 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Layer 3: Portfolio Section - Scrollable Content */}
-      <div className="relative z-20 mt-screen pt-screen">
+      {/* Layer 3: Portfolio Section - Below Hero */}
+      <div className="relative z-20">
         <div className="min-h-screen bg-[#CECECE]" 
              style={{
                backgroundImage: `repeating-linear-gradient(
