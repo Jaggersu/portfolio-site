@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 import { useClickSound } from '@/hooks/useClickSound'
-import './globals.css'
+import '@/app/globals.css'
 
 export default function LoginPage() {
   const router = useRouter()
