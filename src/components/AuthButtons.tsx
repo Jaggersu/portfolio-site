@@ -48,6 +48,7 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
   };
 
   const handleAdminRedirect = () => {
+    console.log('跳轉中...')
     router.push('/admin')
   };
 
@@ -65,7 +66,7 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
           console.error('登出失敗:', error)
           alert('登出失敗，請稍後再試')
         } else {
-          router.push('/')
+          window.location.href = '/'
         }
       }
     } catch (error) {

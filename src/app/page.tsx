@@ -1,5 +1,7 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+'use client'
+
+import { useState, useEffect } from 'react'
+import { createBrowserClient } from '@supabase/ssr'
 import PortfolioGrid from "@/components/PortfolioGrid";
 import AuthButtons from "@/components/AuthButtons";
 import ExploreButton from "@/components/ExploreButton";
@@ -10,47 +12,36 @@ export const metadata = {
   description: "Timeless Soul, Lightning Speed. Design portfolio showcasing creative works",
 };
 
-export default async function HomePage() {
-  const cookieStore = await cookies()
-  
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get: (name: string) => {
-          const cookie = cookieStore.get(name)
-          return cookie?.value
-        },
-        set: (name: string, value: string, options: any) => {
-          cookieStore.set({
-            name,
-            value,
-            ...options,
-            httpOnly: true,
-            sameSite: 'lax',
-            path: '/',
-            secure: process.env.NODE_ENV === 'production'
-          })
-        },
-        remove: (name: string, options: any) => {
-          cookieStore.delete({
-            name,
-            ...options,
-            path: '/'
-          })
-        },
-      },
-    }
-  )
+export default function HomePage() {
+  const [session, setSession] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
-  const { data: { session } } = await supabase.auth.getSession()
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        
+        if (supabaseUrl && supabaseAnonKey) {
+          const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
+          const { data: { session } } = await supabase.auth.getSession()
+          setSession(session)
+        }
+      } catch (error) {
+        console.error('檢查 Session 失敗:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    checkSession()
+  }, [])
 
   return (
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
-        <AuthButtons session={session} />
+        {!loading && <AuthButtons session={session} />}
       </div>
       
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}

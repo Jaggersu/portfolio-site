@@ -5,6 +5,21 @@ import { useClickSound } from '@/hooks/useClickSound'
 export default function ExploreButton() {
   const { playClickSound } = useClickSound()
 
+  const handleExplore = () => {
+    console.log('探索作品...')
+    // 滾動到作品區域
+    const portfolioSection = document.querySelector('.relative.z-20')
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      // 備用方案：滾動到頁面底部
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <div className="inline-block">
       <button
@@ -23,13 +38,7 @@ export default function ExploreButton() {
           cursor: 'pointer'
         }}
         onMouseDown={playClickSound}
-        onClick={() => {
-          // 滾動到作品區域
-          const portfolioSection = document.querySelector('.relative.z-20')
-          if (portfolioSection) {
-            portfolioSection.scrollIntoView({ behavior: 'smooth' })
-          }
-        }}
+        onClick={handleExplore}
       >
         探索作品
       </button>

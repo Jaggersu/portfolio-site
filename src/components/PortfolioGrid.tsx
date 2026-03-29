@@ -18,6 +18,12 @@ interface PortfolioGridProps {
 export default function PortfolioGrid({ items }: PortfolioGridProps) {
   const { playClickSound, isInteracted, isPlaying } = useClickSound();
 
+  const handleItemClick = (item: PortfolioItem) => {
+    console.log('點擊作品:', item.title)
+    playClickSound()
+    // 這裡可以添加更多互動邏輯，比如打開詳情頁面
+  }
+
   return (
     <div className="relative z-20">
       {/* Portfolio Window with Classic Mac OS 9 Title Bar */}
@@ -114,7 +120,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
                   borderImage: 'linear-gradient(to right, #FFFFFF 0%, #FFFFFF 50%, #808080 50%, #808080 100%) 1',
                   boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.2)'
                 }}
-                onClick={playClickSound}
+                onClick={() => handleItemClick(item)}
               >
                 <div className="aspect-square bg-gray-50 relative overflow-hidden"
                      style={{ borderBottom: '1px solid #808080' }}>
