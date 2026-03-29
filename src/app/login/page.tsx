@@ -253,7 +253,7 @@ export default function LoginPage() {
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-base">🌐</span>
+              <img src="/google-logo.png" alt="Google" className="w-6 h-6" style={{ imageRendering: 'pixelated' }} />
               <span>Google</span>
             </button>
             
@@ -277,7 +277,7 @@ export default function LoginPage() {
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-base">🍎</span>
+              <img src="/apple-logo.png" alt="Apple" className="w-6 h-6" style={{ imageRendering: 'pixelated' }} />
               <span>Apple</span>
             </button>
             
@@ -301,7 +301,7 @@ export default function LoginPage() {
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-base">💳</span>
+              <img src="/web3-logo.png" alt="Web3" className="w-6 h-6" style={{ imageRendering: 'pixelated' }} />
               <span>Web3</span>
             </button>
           </div>
