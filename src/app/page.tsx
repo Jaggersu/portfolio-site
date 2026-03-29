@@ -49,12 +49,9 @@ export default async function HomePage() {
             <h1 
               className="text-6xl sm:text-7xl lg:text-8xl font-black text-black mb-2"
               style={{
-                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                fontSmooth: 'never',
-                WebkitFontSmoothing: 'none',
-                MozOsxFontSmoothing: 'grayscale',
-                imageRendering: 'pixelated',
-                textShadow: '3px 3px 0px rgba(255, 255, 255, 0.8), -2px -2px 0px rgba(0, 0, 0, 0.3)',
+                fontFamily: '"Chicago", "Charcoal", "Geneva", sans-serif',
+                fontWeight: 900,
+                textShadow: '1px 1px 0px white',
                 letterSpacing: '0.02em',
                 lineHeight: '1.1'
               }}
@@ -63,27 +60,21 @@ export default async function HomePage() {
             </h1>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4"
                  style={{
-                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                   fontSmooth: 'never',
-                   WebkitFontSmoothing: 'none',
-                   MozOsxFontSmoothing: 'grayscale',
-                   imageRendering: 'pixelated',
-                   textShadow: '2px 2px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", sans-serif',
+                   fontWeight: 900,
+                   textShadow: '1px 1px 0px white',
                    letterSpacing: '0.02em'
                  }}>
               Timeless Soul, Lightning Speed.
             </div>
             <div className="text-lg sm:text-xl lg:text-2xl font-mono text-black"
                  style={{
-                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                   fontSmooth: 'never',
-                   WebkitFontSmoothing: 'none',
-                   MozOsxFontSmoothing: 'grayscale',
-                   imageRendering: 'pixelated',
-                   textShadow: '1px 1px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", sans-serif',
+                   fontWeight: 900,
+                   textShadow: '1px 1px 0px white',
                    letterSpacing: '0.02em'
                  }}>
-              閃電般經典的靈魂
+              經典的靈魂，閃電般的速度
             </div>
           </div>
         </div>
