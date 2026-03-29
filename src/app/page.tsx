@@ -1,10 +1,120 @@
-'use client';
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+import ControlStrip from "@/components/ControlStrip";
+import PortfolioGrid from "@/components/PortfolioGrid";
+import AuthButtons from "@/components/AuthButtons";
+import "./globals.css";
 
-import Image from "next/image";
-import { useState, useEffect } from 'react';
-import PortfolioGrid from '@/components/PortfolioGrid';
-import { useClickSound } from '@/hooks/useClickSound';
-import { createBrowserClient } from '@supabase/ssr';
+export const metadata = {
+  title: "Studio 99+ - Portfolio",
+  description: "Timeless Soul, Lightning Speed. Design portfolio showcasing creative works",
+};
+
+export default async function HomePage() {
+  const cookieStore = await cookies()
+  
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get: (name: string) => {
+          const cookie = cookieStore.get(name)
+          return cookie?.value
+        },
+        set: (name: string, value: string, options: any) => {
+          cookieStore.set({
+            name,
+            value,
+            ...options,
+            httpOnly: true,
+            sameSite: 'lax',
+            path: '/',
+            secure: process.env.NODE_ENV === 'production'
+          })
+        },
+        remove: (name: string, options: any) => {
+          cookieStore.delete({
+            name,
+            ...options,
+            path: '/'
+          })
+        },
+      },
+    }
+  )
+
+  const { data: { session } } = await supabase.auth.getSession()
+
+  return (
+    <div className="relative min-h-screen">
+      {/* Mac OS 9 Login Button - Top Right */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="flex flex-col items-end gap-2">
+          {/* 除錯標籤 */}
+          <div className="text-xs font-mono text-black bg-white px-2 py-1 border border-black">
+            {session ? '已抓到 Session' : '無 Session'}
+          </div>
+          
+          {/* 按鈕群組 */}
+          <AuthButtons session={session} />
+        </div>
+      </div>
+      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
+      <div 
+        className="fixed inset-0 z-10 flex items-center justify-center"
+        style={{
+          backgroundColor: '#CECECE',
+          backgroundImage: `repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.08) 0px,
+            transparent 1px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.08) 3px
+          )`,
+          backgroundSize: '4px 4px',
+          transform: 'translateY(0px)',
+          opacity: 1
+        }}
+      >
+        <div className="text-center z-20">
+          <h1 
+            className="text-6xl md:text-8xl font-bold mb-6"
+            style={{
+              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+              fontSmooth: 'never',
+              WebkitFontSmoothing: 'none',
+              MozOsxFontSmoothing: 'grayscale',
+              imageRendering: 'pixelated',
+              color: '#000000',
+              textShadow: '2px 2px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.5)',
+              letterSpacing: '0.05em'
+            }}
+          >
+            Studio 99+
+          </h1>
+          <p 
+            className="text-xl md:text-2xl mb-8"
+            style={{
+              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+              fontSmooth: 'never',
+              WebkitFontSmoothing: 'none',
+              MozOsxFontSmoothing: 'grayscale',
+              imageRendering: 'pixelated',
+              color: '#333333',
+              textShadow: '1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.3)'
+            }}
+          >
+            Timeless Soul, Lightning Speed
+          </p>
+          <PortfolioGrid items={portfolioItems} />
+        </div>
+      </div>
+      {/* Layer 3: Control Strip - Bottom Left */}
+      <ControlStrip />
+    </div>
+  );
+}
 
 const portfolioItems = [
   {
@@ -49,283 +159,4 @@ const portfolioItems = [
     image: "/next.svg",
     description: "品牌動態識別系統設計"
   }
-];
-
-export default function HomePage() {
-  const [scrollY, setScrollY] = useState(0);
-  const { playClickSound, isInteracted, isPlaying } = useClickSound();
-  const [session, setSession] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  // 檢查登入狀態
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-        
-        if (supabaseUrl && supabaseAnonKey) {
-          const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
-          
-          // 檢查所有 Cookie
-          console.log('所有 Cookie:', document.cookie)
-          
-          // 初始檢查
-          const { data: { session } } = await supabase.auth.getSession()
-          console.log('當前 Session:', session)
-          
-          // 強制驗證 User（比 getSession 更嚴格）
-          const { data: { user }, error: userError } = await supabase.auth.getUser()
-          console.log('強制驗證 User:', user, userError)
-          
-          setSession(session)
-          
-          // 監聽認證狀態變化
-          const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            console.log('Auth state changed:', event, session?.user?.email)
-            console.log('當前 Session:', session)
-            setSession(session)
-          })
-          
-          return () => subscription.unsubscribe()
-        }
-      } catch (error) {
-        console.error('檢查登入狀態失敗:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    checkSession()
-  }, [])
-
-  const handleLogin = async () => {
-    try {
-      // 檢查環境變數
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      
-      // 詳細的除錯資訊
-      console.log('環境變數檢查:', {
-        supabaseUrl: supabaseUrl,
-        supabaseAnonKey: supabaseAnonKey ? '存在' : '不存在',
-        envKeys: Object.keys(process.env).filter(key => key.startsWith('NEXT_PUBLIC_'))
-      })
-      
-      if (!supabaseUrl || !supabaseAnonKey) {
-        console.error('Supabase 環境變數缺失:', {
-          NEXT_PUBLIC_SUPABASE_URL: !!supabaseUrl,
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: !!supabaseAnonKey
-        })
-        alert('系統配置錯誤，請聯繫管理員')
-        return
-      }
-      
-      const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
-      
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`
-        }
-      });
-      
-      if (error) {
-        console.error('登入失敗:', error);
-        alert('登入失敗，請稍後再試')
-      }
-    } catch (error) {
-      console.error('登入錯誤:', error);
-      alert('登入發生錯誤，請稍後再試')
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      
-      if (supabaseUrl && supabaseAnonKey) {
-        const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
-        const { error } = await supabase.auth.signOut()
-        
-        if (error) {
-          console.error('登出失敗:', error)
-          alert('登出失敗，請稍後再試')
-        } else {
-          setSession(null)
-        }
-      }
-    } catch (error) {
-      console.error('登出錯誤:', error)
-      alert('登出發生錯誤，請稍後再試')
-    }
-  };
-
-  const handleAdminRedirect = () => {
-    window.location.href = '/admin'
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <div className="relative min-h-screen">
-      {/* Mac OS 9 Login Button - Top Right */}
-      <div className="fixed top-4 right-4 z-50">
-        <div className="flex flex-col items-end gap-2">
-          {/* 除錯標籤 */}
-          {!loading && (
-            <div className="text-xs font-mono text-black bg-white px-2 py-1 border border-black">
-              {loading ? '檢查中...' : session ? '已抓到 Session' : '無 Session'}
-            </div>
-          )}
-          
-          {/* 按鈕群組 */}
-          {!loading && (
-            <div className="flex gap-2">
-              {session && session?.user?.email?.toLowerCase() === 'jaggersu@gmail.com' ? (
-                <>
-                  <button
-                    onClick={handleAdminRedirect}
-                    className="px-4 py-2 text-black font-mono text-sm"
-                    style={{
-                      backgroundColor: '#DDDDDD',
-                      border: '1px solid #000000',
-                      boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                      borderRadius: '0px',
-                      fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                      fontSmooth: 'never',
-                      WebkitFontSmoothing: 'none',
-                      MozOsxFontSmoothing: 'grayscale',
-                      imageRendering: 'pixelated',
-                      cursor: 'pointer'
-                    }}
-                    onMouseDown={playClickSound}
-                  >
-                    進入控制檯
-                  </button>
-                  <button
-                    onClick={handleLogout}
-                    className="px-4 py-2 text-black font-mono text-sm"
-                    style={{
-                      backgroundColor: '#DDDDDD',
-                      border: '1px solid #000000',
-                      boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                      borderRadius: '0px',
-                      fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                      fontSmooth: 'never',
-                      WebkitFontSmoothing: 'none',
-                      MozOsxFontSmoothing: 'grayscale',
-                      imageRendering: 'pixelated',
-                      cursor: 'pointer'
-                    }}
-                    onMouseDown={playClickSound}
-                  >
-                    登出
-                  </button>
-                </>
-              ) : (
-                <button
-                  onClick={handleLogin}
-                  className="px-4 py-2 text-black font-mono text-sm"
-                  style={{
-                    backgroundColor: '#DDDDDD',
-                    border: '1px solid #000000',
-                    boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                    borderRadius: '0px',
-                    fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                    fontSmooth: 'never',
-                    WebkitFontSmoothing: 'none',
-                    MozOsxFontSmoothing: 'grayscale',
-                    imageRendering: 'pixelated',
-                    cursor: 'pointer'
-                  }}
-                  onMouseDown={playClickSound}
-                >
-                  登入
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
-      <div 
-        className="fixed inset-0 z-10 flex items-center justify-center"
-        style={{
-          backgroundColor: '#CECECE',
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.08) 0px,
-            transparent 1px,
-            transparent 2px,
-            rgba(0, 0, 0, 0.08) 3px
-          )`,
-          backgroundSize: '4px 4px',
-          backgroundAttachment: 'fixed',
-          transform: 'none',
-          opacity: 1
-        }}
-      >
-        {/* Pure Hero Section - No Window Frame */}
-        <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-             style={{
-               transform: `translateY(${scrollY * 0.8}px)`, // Hero text moves down faster
-               opacity: Math.max(0, 1 - scrollY / 600) // Text fades out faster
-             }}>
-          <h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight inline-block"
-            style={{
-              color: '#2C2C2C',
-              textShadow: '0px 1px 0px rgba(255, 255, 255, 0.8)'
-            }}
-          >
-            Studio 99+
-          </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl mb-8 leading-relaxed break-words"
-             style={{ color: '#4A4A4A' }}>
-            <span className="block">Timeless Soul, Lightning Speed.</span>
-            <span className="block text-base sm:text-lg lg:text-xl mt-2">閃電般經典的靈魂</span>
-          </p>
-          
-          {/* Classic Mac OS 9 Button */}
-          <div className="inline-block">
-            <button 
-              className="px-8 py-4 bg-[#CECECE] text-gray-900 rounded-lg font-medium text-base
-                       border-2 border-[#B0B0B0]
-                       shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.8),inset_-1px_-1px_0px_0px_rgba(0,0,0,0.2)]
-                       active:shadow-[inset_1px_1px_2px_0px_rgba(0,0,0,0.3)]
-                       transition-all duration-150
-                       hover:bg-[#D0D0D0] hover:border-[#909090]
-                       hover:shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.9),inset_-1px_-1px_0px_0px_rgba(0,0,0,0.1)]
-                       active:translate-x-[1px] active:translate-y-[1px]"
-              style={{
-                color: '#2C2C2C',
-                textShadow: '0px 1px 0px rgba(255, 255, 255, 0.8)'
-              }}
-              onClick={playClickSound}
-            >
-              探索作品
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Layer 3: Portfolio Grid - Highest level with normal scrolling */}
-      <div className="relative z-20">
-        {/* Spacer to push down content */}
-        <div className="h-screen" />
-        
-        {/* Portfolio Grid */}
-        <PortfolioGrid items={portfolioItems} />
-      </div>
-    </div>
-  );
-}
+]
