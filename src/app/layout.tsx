@@ -35,7 +35,7 @@ export default function RootLayout({
       >
         {/* Layer 1: Fixed Pinstripes Background - z-index: 1 */}
         <div 
-          className="fixed inset-0 pointer-events-none z-1"
+          className="fixed inset-0 pointer-events-none z-10"
           style={{
             backgroundImage: `repeating-linear-gradient(
               0deg,
@@ -50,7 +50,7 @@ export default function RootLayout({
         />
         
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col min-h-full">
+        <div className="relative z-20 flex flex-col min-h-full">
           <main className="flex-1">
             {children}
           </main>

@@ -55,22 +55,14 @@ export default async function HomePage() {
       
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}
       <div 
-        className="fixed inset-0 z-10 flex items-center justify-center"
+        className="fixed inset-0 z-20 flex items-center justify-center"
         style={{
-          backgroundColor: '#CECECE',
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.08) 0px,
-            transparent 1px,
-            transparent 2px,
-            rgba(0, 0, 0, 0.08) 3px
-          )`,
-          backgroundSize: '4px 4px',
+          backgroundColor: 'transparent',
           transform: 'translateY(0px)',
           opacity: 1
         }}
       >
-        <div className="text-center z-20">
+        <div className="text-center">
           <h1 
             className="text-6xl md:text-8xl font-bold mb-6"
             style={{
@@ -105,7 +97,9 @@ export default async function HomePage() {
       </div>
       
       {/* Layer 3: Control Strip - Bottom Left */}
-      <ControlStrip />
+      <div className="fixed bottom-4 left-4 z-30">
+        <ControlStrip />
+      </div>
     </div>
   );
 }
