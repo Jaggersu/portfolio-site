@@ -14,37 +14,9 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
   const { playClickSound } = useClickSound()
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async () => {
-    try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      
-      if (!supabaseUrl || !supabaseAnonKey) {
-        console.error('Supabase 環境變數缺失:', {
-          NEXT_PUBLIC_SUPABASE_URL: !!supabaseUrl,
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: !!supabaseAnonKey
-        })
-        alert('系統配置錯誤，請聯繫管理員')
-        return
-      }
-      
-      const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
-      
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`
-        }
-      });
-      
-      if (error) {
-        console.error('登入失敗:', error);
-        alert('登入失敗，請稍後再試')
-      }
-    } catch (error) {
-      console.error('登入錯誤:', error);
-      alert('登入發生錯誤，請稍後再試')
-    }
+  const handleLogin = () => {
+    console.log('跳轉到登入頁面...')
+    router.push('/login')
   };
 
   const handleAdminRedirect = () => {

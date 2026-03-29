@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import PortfolioGrid from "@/components/PortfolioGrid";
 import AuthButtons from "@/components/AuthButtons";
@@ -20,6 +20,9 @@ export default function HomePage() {
         if (supabaseUrl && supabaseAnonKey) {
           const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
           
+          // 檢查 Cookie 狀態
+          console.log('所有 Cookie:', document.cookie)
+          
           // 初始檢查
           const { data: { session } } = await supabase.auth.getSession()
           console.log('初始 Session:', session?.user?.email)
@@ -27,8 +30,19 @@ export default function HomePage() {
           
           // 監聽認證狀態變化
           const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            console.log('Auth state changed:', event, session?.user?.email)
+            console.log('=== Auth State Change ===')
+            console.log('Event:', event)
+            console.log('Session:', session?.user?.email)
+            console.log('所有 Cookie:', document.cookie)
+            console.log('========================')
             setSession(session)
+            
+            // 強制重新檢查一次
+            setTimeout(async () => {
+              const { data: { session: recheckSession } } = await supabase.auth.getSession()
+              console.log('重新檢查 Session:', recheckSession?.user?.email)
+              setSession(recheckSession)
+            }, 1000)
           })
           
           return () => subscription.unsubscribe()
@@ -41,7 +55,41 @@ export default function HomePage() {
     }
 
     checkSession()
+    
+    // 定期檢查 Session（備用方案）
+    const interval = setInterval(async () => {
+      try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        
+        if (supabaseUrl && supabaseAnonKey) {
+          const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
+          const { data: { session: currentSession } } = await supabase.auth.getSession()
+          if (currentSession && !sessionEquals(currentSession, sessionRef.current)) {
+            console.log('定期檢查發現 Session 變化')
+            setSession(currentSession)
+          }
+        }
+      } catch (error) {
+        console.error('定期檢查失敗:', error)
+      }
+    }, 3000)
+    
+    return () => {
+      clearInterval(interval)
+    }
   }, [])
+
+  // 比較兩個 session 是否相同
+  const sessionEquals = (s1: any, s2: any) => {
+    if (!s1 && !s2) return true
+    if (!s1 || !s2) return false
+    return s1.user?.email === s2.user?.email
+  }
+
+  // 保存當前 session 的 ref
+  const sessionRef = useRef(session)
+  sessionRef.current = session
 
   return (
     <div className="relative min-h-screen">
