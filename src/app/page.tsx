@@ -50,16 +50,9 @@ export default async function HomePage() {
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
-        <div className="flex flex-col items-end gap-2">
-          {/* 除錯標籤 */}
-          <div className="text-xs font-mono text-black bg-white px-2 py-1 border border-black">
-            {session ? '已抓到 Session' : '無 Session'}
-          </div>
-          
-          {/* 按鈕群組 */}
-          <AuthButtons session={session} />
-        </div>
+        <AuthButtons session={session} />
       </div>
+      
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}
       <div 
         className="fixed inset-0 z-10 flex items-center justify-center"
@@ -110,6 +103,7 @@ export default async function HomePage() {
           <PortfolioGrid items={portfolioItems} />
         </div>
       </div>
+      
       {/* Layer 3: Control Strip - Bottom Left */}
       <ControlStrip />
     </div>
