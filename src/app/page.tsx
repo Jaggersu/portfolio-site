@@ -53,15 +53,8 @@ export default async function HomePage() {
         <AuthButtons session={session} />
       </div>
       
-      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
-      <div 
-        className="fixed inset-0 z-20 flex items-center justify-center"
-        style={{
-          backgroundColor: 'transparent',
-          transform: 'translateY(0px)',
-          opacity: 1
-        }}
-      >
+      {/* Hero Section - Full Screen */}
+      <div className="min-h-screen flex items-center justify-center relative z-20">
         <div className="text-center">
           <h1 
             className="text-6xl md:text-8xl font-bold mb-6"
@@ -96,7 +89,7 @@ export default async function HomePage() {
         </div>
       </div>
       
-      {/* Layer 3: Control Strip - Bottom Left */}
+      {/* Control Strip - Bottom Left */}
       <div className="fixed bottom-4 left-4 z-30">
         <ControlStrip />
       </div>
