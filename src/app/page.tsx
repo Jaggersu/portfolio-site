@@ -87,7 +87,7 @@ export default async function HomePage() {
             }}
           >
             <span className="block">Timeless Soul, Lightning Speed.</span>
-            <span className="block text-base sm:text-lg lg:text-xl mt-2">經典的靈魂，閃電般的速度</span>
+            <span className="block text-base sm:text-lg lg:text-xl mt-2">閃電般經典的靈魂</span>
           </h1>
         </div>
       </div>
