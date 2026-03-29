@@ -1,138 +1,82 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { createBrowserClient } from '@supabase/ssr'
-import { useClickSound } from '@/hooks/useClickSound'
+import { createBrowserClient } from '@supabase/ssr';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-interface AuthButtonsProps {
-  session: any
-}
+export default function AuthButtons() {
+  const router = useRouter();
+  const [session, setSession] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-export default function AuthButtons({ session }: AuthButtonsProps) {
-  const router = useRouter()
-  const { playClickSound } = useClickSound()
-  const [loading, setLoading] = useState(false)
+  // 初始化 Supabase Browser Client
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
-  // 除錯：顯示當前 session 狀態
-  console.log('=== AuthButtons Render ===')
-  console.log('Session 存在:', !!session)
-  console.log('Session Email:', session?.user?.email)
-  console.log('========================')
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session: currentSession } } = await supabase.auth.getSession();
+      setSession(currentSession);
+      setLoading(false);
+    };
 
+    checkSession();
+
+    // 監聽登入狀態變化
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase]);
+
+  // 登入：跳轉到我們新蓋的專業登入頁
   const handleLogin = () => {
-    console.log('=== 登入按鈕被點擊 ===')
-    console.log('跳轉到登入頁面...')
-    console.log('Router 狀態:', router)
-    try {
-      router.push('/login')
-      console.log('router.push 已執行')
-    } catch (error) {
-      console.error('router.push 錯誤:', error)
-      // 備用方案：直接使用 window.location
-      window.location.href = '/login'
-    }
+    router.push('/login');
   };
 
-  const handleAdminRedirect = () => {
-    console.log('跳轉中...')
-    router.push('/admin')
+  // 進入控制檯：暴力跳轉到 /admin
+  const handleAdmin = () => {
+    window.location.href = '/admin';
   };
 
+  // 登出：徹底清除並強制刷回首頁
   const handleLogout = async () => {
-    setLoading(true)
-    try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      
-      if (supabaseUrl && supabaseAnonKey) {
-        const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
-        const { error } = await supabase.auth.signOut()
-        
-        if (error) {
-          console.error('登出失敗:', error)
-          alert('登出失敗，請稍後再試')
-        } else {
-          window.location.href = '/'
-        }
-      }
-    } catch (error) {
-      console.error('登出錯誤:', error)
-      alert('登出發生錯誤，請稍後再試')
-    } finally {
-      setLoading(false)
-    }
+    await supabase.auth.signOut();
+    // 強制全網頁重整，這是解決 Cookie 殘留最有效的方法
+    window.location.href = '/';
   };
+
+  if (loading) return <div className="px-4 py-1 text-sm font-mono">Checking...</div>;
 
   return (
-    <div className="flex gap-2">
-      {session && session?.user?.email?.toLowerCase() === 'jaggersu@gmail.com' ? (
+    <div className="flex gap-2 items-center">
+      {session && session.user?.email === 'jaggersu@gmail.com' ? (
         <>
-          <button
-            onClick={handleAdminRedirect}
-            className="px-4 py-2 text-black font-mono text-sm"
-            style={{
-              backgroundColor: '#DDDDDD',
-              border: '1px solid #000000',
-              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-              borderRadius: '0px',
-              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-              fontSmooth: 'never',
-              WebkitFontSmoothing: 'none',
-              MozOsxFontSmoothing: 'grayscale',
-              imageRendering: 'pixelated',
-              cursor: 'pointer'
-            }}
-            onMouseDown={playClickSound}
+          <button 
+            onClick={handleAdmin}
+            className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
           >
             進入控制檯
           </button>
-          <button
+          <button 
             onClick={handleLogout}
-            disabled={loading}
-            className="px-4 py-2 text-black font-mono text-sm"
-            style={{
-              backgroundColor: '#DDDDDD',
-              border: '1px solid #000000',
-              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-              borderRadius: '0px',
-              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-              fontSmooth: 'never',
-              WebkitFontSmoothing: 'none',
-              MozOsxFontSmoothing: 'grayscale',
-              imageRendering: 'pixelated',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.6 : 1
-            }}
-            onMouseDown={playClickSound}
+            className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
           >
-            {loading ? '登出中...' : '登出'}
+            登出
           </button>
         </>
       ) : (
-        <button
+        <button 
           onClick={handleLogin}
-          className="px-4 py-2 text-black font-mono text-sm"
-          style={{
-            backgroundColor: '#DDDDDD',
-            border: '1px solid #000000',
-            boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-            borderRadius: '0px',
-            fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-            fontSmooth: 'never',
-            WebkitFontSmoothing: 'none',
-            MozOsxFontSmoothing: 'grayscale',
-            imageRendering: 'pixelated',
-            cursor: 'pointer'
-          }}
-          onMouseDown={(e) => {
-            console.log('=== onMouseDown 觸發 ===')
-            playClickSound()
-          }}
+          className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
         >
           登入
         </button>
       )}
     </div>
-  )
+  );
 }

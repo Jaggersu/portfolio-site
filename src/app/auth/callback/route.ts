@@ -73,14 +73,9 @@ export async function GET(request: NextRequest) {
       
       console.log('Email 比對:', { userEmail, allowed: ALLOWED_EMAILS.includes(userEmail) })
       
-      // 根據 VIP 狀態導向不同頁面
-      if (ALLOWED_EMAILS.includes(userEmail)) {
-        console.log('VIP 使用者，導向後台')
-        return NextResponse.redirect(new URL('/admin', request.url))
-      } else {
-        console.log('非 VIP 使用者，導向首頁')
-        return NextResponse.redirect(new URL('/', request.url))
-      }
+      // 強制轉址到後台 - 不回首頁
+      console.log('Session 建立成功，強制導向後台')
+      return NextResponse.redirect(new URL('/admin', request.url))
       
     } catch (error) {
       console.error('Callback 處理錯誤:', error)

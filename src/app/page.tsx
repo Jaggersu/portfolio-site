@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import PortfolioGrid from "@/components/PortfolioGrid";
-import AuthButtons from "@/components/AuthButtons";
 import ExploreButton from "@/components/ExploreButton";
+import AuthButtons from "@/components/AuthButtons";
 import "./globals.css";
 
 export default function HomePage() {
@@ -98,24 +98,7 @@ export default function HomePage() {
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
-        {loading ? (
-          <div className="px-4 py-2 text-black font-mono text-sm"
-               style={{
-                 backgroundColor: '#DDDDDD',
-                 border: '1px solid #000000',
-                 boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                 borderRadius: '0px',
-                 fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                 fontSmooth: 'never',
-                 WebkitFontSmoothing: 'none',
-                 MozOsxFontSmoothing: 'grayscale',
-                 imageRendering: 'pixelated'
-               }}>
-            載入中...
-          </div>
-        ) : (
-          <AuthButtons session={session} />
-        )}
+        <AuthButtons />
       </div>
       
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}
