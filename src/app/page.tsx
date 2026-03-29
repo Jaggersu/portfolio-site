@@ -53,43 +53,88 @@ export default async function HomePage() {
         <AuthButtons session={session} />
       </div>
       
-      {/* Hero Section - Full Screen */}
-      <div className="min-h-screen flex items-center justify-center relative z-20">
-        <div className="text-center">
-          <h1 
-            className="text-6xl md:text-8xl font-bold mb-6"
+      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
+      <div
+        className="fixed inset-0 z-10 flex items-center justify-center"
+        style={{
+          backgroundColor: '#CECECE',
+          backgroundImage: `repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.08) 0px,
+            transparent 1px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.08) 3px
+          )`,
+          backgroundSize: '4px 4px',
+          backgroundAttachment: 'fixed',
+          transform: 'none',
+          opacity: 1
+        }}
+      >
+        {/* Pure Hero Section - No Window Frame */}
+        <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight inline-block"
             style={{
               fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
               fontSmooth: 'never',
               WebkitFontSmoothing: 'none',
               MozOsxFontSmoothing: 'grayscale',
               imageRendering: 'pixelated',
-              color: '#000000',
-              textShadow: '2px 2px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.5)',
-              letterSpacing: '0.05em'
+              color: '#2C2C2C',
+              textShadow: '0px 1px 0px rgba(255, 255, 255, 0.8)'
             }}
           >
             Studio 99+
           </h1>
           <p 
-            className="text-xl md:text-2xl mb-8"
+            className="text-lg sm:text-xl lg:text-2xl mb-8 leading-relaxed break-words"
             style={{
               fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
               fontSmooth: 'never',
               WebkitFontSmoothing: 'none',
               MozOsxFontSmoothing: 'grayscale',
               imageRendering: 'pixelated',
-              color: '#333333',
-              textShadow: '1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.3)'
+              color: '#4A4A4A'
             }}
           >
-            Timeless Soul, Lightning Speed
+            <span className="block">Timeless Soul, Lightning Speed.</span>
+            <span className="block text-base sm:text-lg lg:text-xl mt-2">閃電般經典的靈魂</span>
           </p>
-          <PortfolioGrid items={portfolioItems} />
+
+          {/* Classic Mac OS 9 Button */}
+          <div className="inline-block">
+            <button
+              className="px-8 py-4 text-gray-900 rounded-lg font-medium text-base border-2 border-[#B0B0B0]"
+              style={{
+                backgroundColor: '#CECECE',
+                boxShadow: 'inset 1px 1px 0px 0px rgba(255,255,255,0.8), inset -1px -1px 0px 0px rgba(0,0,0,0.2)',
+                color: '#2C2C2C',
+                textShadow: '0px 1px 0px rgba(255, 255, 255, 0.8)',
+                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                fontSmooth: 'never',
+                WebkitFontSmoothing: 'none',
+                MozOsxFontSmoothing: 'grayscale',
+                imageRendering: 'pixelated',
+                borderRadius: '0px'
+              }}
+            >
+              探索作品
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Layer 3: Portfolio Grid - Highest level with normal scrolling */}
+      <div className="relative z-20">
+        {/* Spacer to push down content */}
+        <div className="h-screen" />
+
+        {/* Portfolio Grid */}
+        <PortfolioGrid items={portfolioItems} />
+      </div>
       
-      {/* Control Strip - Bottom Left */}
+      {/* Layer 4: Control Strip - Bottom Left */}
       <div className="fixed bottom-4 left-4 z-30">
         <ControlStrip />
       </div>
