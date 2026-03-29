@@ -7,11 +7,6 @@ import AuthButtons from "@/components/AuthButtons";
 import ExploreButton from "@/components/ExploreButton";
 import "./globals.css";
 
-export const metadata = {
-  title: "Studio 99+ - Portfolio",
-  description: "Timeless Soul, Lightning Speed. Design portfolio showcasing creative works",
-};
-
 export default function HomePage() {
   const [session, setSession] = useState<any>(null)
   const [loading, setLoading] = useState(true)
