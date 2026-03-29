@@ -160,8 +160,8 @@ export default function HomePage() {
               color: '#4A4A4A'
             }}
           >
-            <span className="block">閃電的效率 | 經典的靈魂</span>
-            <span className="block text-base sm:text-lg lg:text-xl mt-2">Studio 99+ Design</span>
+            <span className="block">Timeless Soul, Lightning Speed.</span>
+            <span className="block text-base sm:text-lg lg:text-xl mt-2">閃電般經典的靈魂</span>
           </p>
 
           {/* Classic Mac OS 9 Button */}
