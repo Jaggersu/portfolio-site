@@ -19,8 +19,19 @@ export default function HomePage() {
         
         if (supabaseUrl && supabaseAnonKey) {
           const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
+          
+          // 初始檢查
           const { data: { session } } = await supabase.auth.getSession()
+          console.log('初始 Session:', session?.user?.email)
           setSession(session)
+          
+          // 監聽認證狀態變化
+          const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log('Auth state changed:', event, session?.user?.email)
+            setSession(session)
+          })
+          
+          return () => subscription.unsubscribe()
         }
       } catch (error) {
         console.error('檢查 Session 失敗:', error)
@@ -36,7 +47,24 @@ export default function HomePage() {
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
-        {!loading && <AuthButtons session={session} />}
+        {loading ? (
+          <div className="px-4 py-2 text-black font-mono text-sm"
+               style={{
+                 backgroundColor: '#DDDDDD',
+                 border: '1px solid #000000',
+                 boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+                 borderRadius: '0px',
+                 fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                 fontSmooth: 'never',
+                 WebkitFontSmoothing: 'none',
+                 MozOsxFontSmoothing: 'grayscale',
+                 imageRendering: 'pixelated'
+               }}>
+            載入中...
+          </div>
+        ) : (
+          <AuthButtons session={session} />
+        )}
       </div>
       
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}
