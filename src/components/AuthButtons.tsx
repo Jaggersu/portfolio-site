@@ -1,39 +1,13 @@
 'use client';
 
 import { createBrowserClient } from '@supabase/ssr';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
-export default function AuthButtons() {
-  const router = useRouter();
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // 初始化 Supabase Browser Client
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUserEmail(session?.user?.email ?? null);
-      setLoading(false);
-    };
-
-    checkSession();
-
-    // 監聽登入狀態變化
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserEmail(session?.user?.email ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+export default function AuthButtons({ userEmail }: { userEmail: string | null }) {
+  // 檢查是否為牛哥的信箱
+  const isVIP = userEmail === 'jaggersu@gmail.com' || userEmail === 'sujagger.104@gmail.com';
 
   const handleLogin = () => {
-    router.push('/login');
+    window.location.href = '/login';
   };
 
   const handleAdmin = () => {
@@ -46,37 +20,21 @@ export default function AuthButtons() {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
     await supabase.auth.signOut();
-    window.location.href = '/';
+    window.location.href = '/'; // 登出後強制重整首頁
   };
 
-  if (loading) return null; // 載入時不顯示，避免畫面閃爍
-
-  const isVIP = userEmail === 'jaggersu@gmail.com' || userEmail === 'sujagger.104@gmail.com';
+  // 經典 Mac OS 9 按鈕樣式
+  const btnStyle = "px-4 py-1 text-black font-mono text-sm bg-[#CECECE] border border-black shadow-[inset_1px_1px_0_white,inset_-1px_-1px_0_gray] active:shadow-[inset_1px_1px_0_gray,inset_-1px_-1px_0_white]";
 
   return (
     <div className="flex gap-2 items-center">
       {isVIP ? (
         <>
-          <button 
-            onClick={handleAdmin}
-            className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
-          >
-            進入控制檯
-          </button>
-          <button 
-            onClick={handleLogout}
-            className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
-          >
-            登出
-          </button>
+          <button onClick={handleAdmin} className={btnStyle}>進入控制檯</button>
+          <button onClick={handleLogout} className={btnStyle}>登出</button>
         </>
       ) : (
-        <button 
-          onClick={handleLogin}
-          className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
-        >
-          登入
-        </button>
+        <button onClick={handleLogin} className={btnStyle}>登入</button>
       )}
     </div>
   );
