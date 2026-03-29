@@ -72,12 +72,18 @@ export default function HomePage() {
           
           // 初始檢查
           const { data: { session } } = await supabase.auth.getSession()
-          console.log('Initial session check:', session?.user?.email)
+          console.log('當前 Session:', session)
+          
+          // 強制驗證 User（比 getSession 更嚴格）
+          const { data: { user }, error: userError } = await supabase.auth.getUser()
+          console.log('強制驗證 User:', user, userError)
+          
           setSession(session)
           
           // 監聽認證狀態變化
           const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             console.log('Auth state changed:', event, session?.user?.email)
+            console.log('當前 Session:', session)
             setSession(session)
           })
           
@@ -173,14 +179,16 @@ export default function HomePage() {
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
-        {!loading && (
-          <div className="flex flex-col items-end gap-2">
-            {/* 除錯標籤 */}
+        <div className="flex flex-col items-end gap-2">
+          {/* 除錯標籤 */}
+          {!loading && (
             <div className="text-xs font-mono text-black bg-white px-2 py-1 border border-black">
               {loading ? '檢查中...' : session ? '已抓到 Session' : '無 Session'}
             </div>
-            
-            {/* 按鈕群組 */}
+          )}
+          
+          {/* 按鈕群組 */}
+          {!loading && (
             <div className="flex gap-2">
               {session && session?.user?.email?.toLowerCase() === 'jaggersu@gmail.com' ? (
                 <>
@@ -245,8 +253,8 @@ export default function HomePage() {
                 </button>
               )}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}
       <div 
