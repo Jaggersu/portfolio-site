@@ -4,6 +4,9 @@ import AuthButtons from "@/components/AuthButtons";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import "./globals.css";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function HomePage() {
   const cookieStore = await cookies();
   
@@ -40,28 +43,54 @@ export default async function HomePage() {
           backgroundSize: '4px 4px',
         }}
       >
+        {/* Hero Text */}
         <div className="text-center">
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-[#333] mb-4 drop-shadow-md"
-              style={{ fontFamily: '"Chicago", "Charcoal", sans-serif' }}>
-            Studio 99+
-          </h1>
-          <div className="text-2xl sm:text-3xl lg:text-4xl text-[#444] mb-3 drop-shadow-sm"
-               style={{ fontFamily: '"Chicago", "Charcoal", sans-serif' }}>
-            Timeless Soul, Lightning Speed.
+          <div className="mb-8">
+            <h1 
+              className="text-6xl sm:text-7xl lg:text-8xl font-black text-black mb-2"
+              style={{
+                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                fontSmooth: 'never',
+                WebkitFontSmoothing: 'none',
+                MozOsxFontSmoothing: 'grayscale',
+                imageRendering: 'pixelated',
+                textShadow: '3px 3px 0px rgba(255, 255, 255, 0.8), -2px -2px 0px rgba(0, 0, 0, 0.3)',
+                letterSpacing: '0.02em',
+                lineHeight: '1.1'
+              }}
+            >
+              Studio 99+
+            </h1>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4"
+                 style={{
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                   fontSmooth: 'never',
+                   WebkitFontSmoothing: 'none',
+                   MozOsxFontSmoothing: 'grayscale',
+                   imageRendering: 'pixelated',
+                   textShadow: '2px 2px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   letterSpacing: '0.02em'
+                 }}>
+              Timeless Soul, Lightning Speed.
+            </div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-mono text-black"
+                 style={{
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                   fontSmooth: 'never',
+                   WebkitFontSmoothing: 'none',
+                   MozOsxFontSmoothing: 'grayscale',
+                   imageRendering: 'pixelated',
+                   textShadow: '1px 1px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   letterSpacing: '0.02em'
+                 }}>
+              閃電般經典的靈魂
+            </div>
           </div>
-          <div className="text-lg sm:text-xl lg:text-2xl font-mono text-[#555] mb-8 drop-shadow-sm">
-            閃電般經典的靈魂
-          </div>
-          
-          {/* 探索作品按鈕 */}
-          <button className="px-6 py-2 text-black font-mono bg-[#CECECE] border border-black shadow-[inset_1px_1px_0_white,inset_-1px_-1px_0_gray] active:shadow-[inset_1px_1px_0_gray,inset_-1px_-1px_0_white]">
-            探索作品
-          </button>
         </div>
       </div>
 
       {/* 作品集區塊 (Portfolio Section) */}
-      <div className="relative z-20 pt-[100vh]"> 
+      <div className="relative z-20 mt-[100vh] pt-20"> 
         <div className="min-h-screen bg-[#CECECE]" 
              style={{
                backgroundImage: `repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px)`,
