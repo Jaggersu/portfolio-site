@@ -67,6 +67,9 @@ export default function HomePage() {
         if (supabaseUrl && supabaseAnonKey) {
           const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
           
+          // 檢查所有 Cookie
+          console.log('所有 Cookie:', document.cookie)
+          
           // 初始檢查
           const { data: { session } } = await supabase.auth.getSession()
           console.log('Initial session check:', session?.user?.email)
@@ -171,11 +174,58 @@ export default function HomePage() {
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50">
         {!loading && (
-          <div className="flex gap-2">
-            {session && session?.user?.email?.toLowerCase() === 'jaggersu@gmail.com' ? (
-              <>
+          <div className="flex flex-col items-end gap-2">
+            {/* 除錯標籤 */}
+            <div className="text-xs font-mono text-black bg-white px-2 py-1 border border-black">
+              {loading ? '檢查中...' : session ? '已抓到 Session' : '無 Session'}
+            </div>
+            
+            {/* 按鈕群組 */}
+            <div className="flex gap-2">
+              {session && session?.user?.email?.toLowerCase() === 'jaggersu@gmail.com' ? (
+                <>
+                  <button
+                    onClick={handleAdminRedirect}
+                    className="px-4 py-2 text-black font-mono text-sm"
+                    style={{
+                      backgroundColor: '#DDDDDD',
+                      border: '1px solid #000000',
+                      boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+                      borderRadius: '0px',
+                      fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                      fontSmooth: 'never',
+                      WebkitFontSmoothing: 'none',
+                      MozOsxFontSmoothing: 'grayscale',
+                      imageRendering: 'pixelated',
+                      cursor: 'pointer'
+                    }}
+                    onMouseDown={playClickSound}
+                  >
+                    進入控制檯
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 text-black font-mono text-sm"
+                    style={{
+                      backgroundColor: '#DDDDDD',
+                      border: '1px solid #000000',
+                      boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+                      borderRadius: '0px',
+                      fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                      fontSmooth: 'never',
+                      WebkitFontSmoothing: 'none',
+                      MozOsxFontSmoothing: 'grayscale',
+                      imageRendering: 'pixelated',
+                      cursor: 'pointer'
+                    }}
+                    onMouseDown={playClickSound}
+                  >
+                    登出
+                  </button>
+                </>
+              ) : (
                 <button
-                  onClick={handleAdminRedirect}
+                  onClick={handleLogin}
                   className="px-4 py-2 text-black font-mono text-sm"
                   style={{
                     backgroundColor: '#DDDDDD',
@@ -191,49 +241,10 @@ export default function HomePage() {
                   }}
                   onMouseDown={playClickSound}
                 >
-                  進入控制檯
+                  登入
                 </button>
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-2 text-black font-mono text-sm"
-                  style={{
-                    backgroundColor: '#DDDDDD',
-                    border: '1px solid #000000',
-                    boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                    borderRadius: '0px',
-                    fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                    fontSmooth: 'never',
-                    WebkitFontSmoothing: 'none',
-                    MozOsxFontSmoothing: 'grayscale',
-                    imageRendering: 'pixelated',
-                    cursor: 'pointer'
-                  }}
-                  onMouseDown={playClickSound}
-                >
-                  登出
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={handleLogin}
-                className="px-4 py-2 text-black font-mono text-sm"
-                style={{
-                  backgroundColor: '#DDDDDD',
-                  border: '1px solid #000000',
-                  boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-                  borderRadius: '0px',
-                  fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                  fontSmooth: 'never',
-                  WebkitFontSmoothing: 'none',
-                  MozOsxFontSmoothing: 'grayscale',
-                  imageRendering: 'pixelated',
-                  cursor: 'pointer'
-                }}
-                onMouseDown={playClickSound}
-              >
-                登入
-              </button>
-            )}
+              )}
+            </div>
           </div>
         )}
       </div>
