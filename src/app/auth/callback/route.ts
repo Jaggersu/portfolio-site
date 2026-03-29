@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
       }
 
       // VIP 白名單檢查
-      const ALLOWED_EMAILS = ['jaggersu@gmail.com']
+      const ALLOWED_EMAILS = ['jaggersu@gmail.com', 'sujagger.104@gmail.com']
       const userEmail = data.session.user.email?.toLowerCase().trim()
       
       if (!userEmail) {

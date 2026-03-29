@@ -35,7 +35,7 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
 
   return (
     <div className="flex gap-2 items-center">
-      {session && session.user?.email === 'jaggersu@gmail.com' ? (
+      {session && ['jaggersu@gmail.com', 'sujagger.104@gmail.com'].includes(session.user?.email) ? (
         <>
           <button 
             onClick={handleAdmin}

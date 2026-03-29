@@ -53,7 +53,7 @@ export default async function HomePage() {
   return (
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-4 right-4 z-50 pointer-events-auto">
         <AuthButtons session={session} />
       </div>
       
@@ -119,7 +119,7 @@ export default async function HomePage() {
       </div>
 
       {/* Layer 3: Portfolio Section - Scrollable Content */}
-      <div className="relative z-20 mt-screen pt-screen">
+      <div className="relative z-20 mt-[100vh] pt-20">
         <div className="min-h-screen bg-[#CECECE]" 
              style={{
                backgroundImage: `repeating-linear-gradient(

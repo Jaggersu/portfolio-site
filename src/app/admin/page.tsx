@@ -51,7 +51,7 @@ export default function AdminPage() {
     );
   }
 
-  if (!session || session.user?.email !== 'jaggersu@gmail.com') {
+  if (!session || !['jaggersu@gmail.com', 'sujagger.104@gmail.com'].includes(session.user?.email)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#CECECE]" 
            style={{
