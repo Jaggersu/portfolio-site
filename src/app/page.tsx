@@ -54,7 +54,7 @@ export default async function HomePage() {
     <div className="relative min-h-screen">
       {/* Mac OS 9 Login Button - Top Right */}
       <div className="fixed top-4 right-4 z-50 pointer-events-auto">
-        <AuthButtons session={session} />
+        <AuthButtons userEmail={session?.user?.email} />
       </div>
       
       {/* Layer 2: Hero Section - Fixed Position with Parallax */}

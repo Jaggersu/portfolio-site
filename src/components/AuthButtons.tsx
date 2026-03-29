@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 
 interface AuthButtonsProps {
-  session: any
+  userEmail: string | undefined
 }
 
-export default function AuthButtons({ session }: AuthButtonsProps) {
+export default function AuthButtons({ userEmail }: AuthButtonsProps) {
   const router = useRouter();
 
   // 登入：跳轉到我們新蓋的專業登入頁
@@ -35,7 +35,7 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
 
   return (
     <div className="flex gap-2 items-center">
-      {session && ['jaggersu@gmail.com', 'sujagger.104@gmail.com'].includes(session.user?.email) ? (
+      {userEmail === 'jaggersu@gmail.com' || userEmail === 'sujagger.104@gmail.com' ? (
         <>
           <button 
             onClick={handleAdmin}
