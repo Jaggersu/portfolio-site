@@ -1,8 +1,8 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import ControlStrip from "@/components/ControlStrip";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import AuthButtons from "@/components/AuthButtons";
+import ExploreButton from "@/components/ExploreButton";
 import "./globals.css";
 
 export const metadata = {
@@ -104,23 +104,7 @@ export default async function HomePage() {
 
           {/* Classic Mac OS 9 Button */}
           <div className="inline-block">
-            <button
-              className="px-8 py-4 text-gray-900 rounded-lg font-medium text-base border-2 border-[#B0B0B0]"
-              style={{
-                backgroundColor: '#CECECE',
-                boxShadow: 'inset 1px 1px 0px 0px rgba(255,255,255,0.8), inset -1px -1px 0px 0px rgba(0,0,0,0.2)',
-                color: '#2C2C2C',
-                textShadow: '0px 1px 0px rgba(255, 255, 255, 0.8)',
-                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                fontSmooth: 'never',
-                WebkitFontSmoothing: 'none',
-                MozOsxFontSmoothing: 'grayscale',
-                imageRendering: 'pixelated',
-                borderRadius: '0px'
-              }}
-            >
-              探索作品
-            </button>
+            <ExploreButton />
           </div>
         </div>
       </div>
@@ -132,11 +116,6 @@ export default async function HomePage() {
 
         {/* Portfolio Grid */}
         <PortfolioGrid items={portfolioItems} />
-      </div>
-      
-      {/* Layer 4: Control Strip - Bottom Left */}
-      <div className="fixed bottom-4 left-4 z-30">
-        <ControlStrip />
       </div>
     </div>
   );
