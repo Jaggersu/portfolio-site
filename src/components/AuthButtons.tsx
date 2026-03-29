@@ -14,6 +14,12 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
   const { playClickSound } = useClickSound()
   const [loading, setLoading] = useState(false)
 
+  // 除錯：顯示當前 session 狀態
+  console.log('=== AuthButtons Render ===')
+  console.log('Session 存在:', !!session)
+  console.log('Session Email:', session?.user?.email)
+  console.log('========================')
+
   const handleLogin = () => {
     console.log('=== 登入按鈕被點擊 ===')
     console.log('跳轉到登入頁面...')

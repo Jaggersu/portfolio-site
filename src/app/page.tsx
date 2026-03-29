@@ -21,18 +21,21 @@ export default function HomePage() {
           const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
           
           // 檢查 Cookie 狀態
+          console.log('=== 頁面載入檢查 ===')
           console.log('所有 Cookie:', document.cookie)
+          console.log('Supabase URL:', supabaseUrl)
+          console.log('Supabase Key:', supabaseAnonKey ? '存在' : '缺失')
           
           // 初始檢查
           const { data: { session } } = await supabase.auth.getSession()
-          console.log('初始 Session:', session?.user?.email)
+          console.log('初始 Session:', session?.user?.email || '無 Session')
           setSession(session)
           
           // 監聽認證狀態變化
           const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             console.log('=== Auth State Change ===')
             console.log('Event:', event)
-            console.log('Session:', session?.user?.email)
+            console.log('Session:', session?.user?.email || '無 Session')
             console.log('所有 Cookie:', document.cookie)
             console.log('========================')
             setSession(session)
@@ -40,7 +43,7 @@ export default function HomePage() {
             // 強制重新檢查一次
             setTimeout(async () => {
               const { data: { session: recheckSession } } = await supabase.auth.getSession()
-              console.log('重新檢查 Session:', recheckSession?.user?.email)
+              console.log('重新檢查 Session:', recheckSession?.user?.email || '無 Session')
               setSession(recheckSession)
             }, 1000)
           })
@@ -66,7 +69,7 @@ export default function HomePage() {
           const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
           const { data: { session: currentSession } } = await supabase.auth.getSession()
           if (currentSession && !sessionEquals(currentSession, sessionRef.current)) {
-            console.log('定期檢查發現 Session 變化')
+            console.log('定期檢查發現 Session 變化:', currentSession?.user?.email)
             setSession(currentSession)
           }
         }

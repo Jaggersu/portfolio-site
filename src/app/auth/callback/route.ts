@@ -73,9 +73,14 @@ export async function GET(request: NextRequest) {
       
       console.log('Email 比對:', { userEmail, allowed: ALLOWED_EMAILS.includes(userEmail) })
       
-      // 確保 Session 已正確寫入 Cookie
-      console.log('Session 建立成功，導向首頁')
-      return NextResponse.redirect(new URL('/', request.url))
+      // 根據 VIP 狀態導向不同頁面
+      if (ALLOWED_EMAILS.includes(userEmail)) {
+        console.log('VIP 使用者，導向後台')
+        return NextResponse.redirect(new URL('/admin', request.url))
+      } else {
+        console.log('非 VIP 使用者，導向首頁')
+        return NextResponse.redirect(new URL('/', request.url))
+      }
       
     } catch (error) {
       console.error('Callback 處理錯誤:', error)
