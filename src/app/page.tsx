@@ -74,21 +74,47 @@ export default async function HomePage() {
       >
         {/* Hero Text */}
         <div className="text-center">
-          <h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black mb-4"
-            style={{
-              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-              fontSmooth: 'never',
-              WebkitFontSmoothing: 'none',
-              MozOsxFontSmoothing: 'grayscale',
-              imageRendering: 'pixelated',
-              textShadow: '2px 2px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
-              letterSpacing: '0.02em'
-            }}
-          >
-            <span className="block">Timeless Soul, Lightning Speed.</span>
-            <span className="block text-base sm:text-lg lg:text-xl mt-2">閃電般經典的靈魂</span>
-          </h1>
+          <div className="mb-8">
+            <h1 
+              className="text-6xl sm:text-7xl lg:text-8xl font-black text-black mb-2"
+              style={{
+                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                fontSmooth: 'never',
+                WebkitFontSmoothing: 'none',
+                MozOsxFontSmoothing: 'grayscale',
+                imageRendering: 'pixelated',
+                textShadow: '3px 3px 0px rgba(255, 255, 255, 0.8), -2px -2px 0px rgba(0, 0, 0, 0.3)',
+                letterSpacing: '0.02em',
+                lineHeight: '1.1'
+              }}
+            >
+              Studio 99+
+            </h1>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4"
+                 style={{
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                   fontSmooth: 'never',
+                   WebkitFontSmoothing: 'none',
+                   MozOsxFontSmoothing: 'grayscale',
+                   imageRendering: 'pixelated',
+                   textShadow: '2px 2px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   letterSpacing: '0.02em'
+                 }}>
+              Timeless Soul, Lightning Speed.
+            </div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-mono text-black"
+                 style={{
+                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+                   fontSmooth: 'never',
+                   WebkitFontSmoothing: 'none',
+                   MozOsxFontSmoothing: 'grayscale',
+                   imageRendering: 'pixelated',
+                   textShadow: '1px 1px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
+                   letterSpacing: '0.02em'
+                 }}>
+              閃電般經典的靈魂
+            </div>
+          </div>
         </div>
       </div>
 
@@ -106,7 +132,29 @@ export default async function HomePage() {
                backgroundSize: '4px 4px'
              }}>
           <div className="container mx-auto px-4 py-16">
-            <PortfolioGrid items={[]} />
+            <PortfolioGrid items={[
+              {
+                id: 1,
+                title: "Mac OS 9 Portfolio",
+                category: "Web Design",
+                image: "/portfolio/mac-os9-portfolio.png",
+                description: "經典的 Mac OS 9 風格作品集網站"
+              },
+              {
+                id: 2,
+                title: "Retro UI Components",
+                category: "UI/UX",
+                image: "/portfolio/retro-components.png",
+                description: "復古風格的 UI 組件庫"
+              },
+              {
+                id: 3,
+                title: "Pixel Art Gallery",
+                category: "Digital Art",
+                image: "/portfolio/pixel-art.png",
+                description: "像素藝術作品展示"
+              }
+            ]} />
           </div>
         </div>
       </div>
