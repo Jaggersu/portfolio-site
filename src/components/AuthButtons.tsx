@@ -58,13 +58,37 @@ export default function AuthButtons() {
         <>
           <button 
             onClick={handleAdmin}
-            className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
+            className="px-4 py-2 text-black font-mono text-sm"
+            style={{
+              backgroundColor: '#DDDDDD',
+              border: '1px solid #000000',
+              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+              borderRadius: '0px',
+              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+              fontSmooth: 'never',
+              WebkitFontSmoothing: 'none',
+              MozOsxFontSmoothing: 'grayscale',
+              imageRendering: 'pixelated',
+              cursor: 'pointer'
+            }}
           >
             進入控制檯
           </button>
           <button 
             onClick={handleLogout}
-            className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
+            className="px-4 py-2 text-black font-mono text-sm"
+            style={{
+              backgroundColor: '#DDDDDD',
+              border: '1px solid #000000',
+              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+              borderRadius: '0px',
+              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+              fontSmooth: 'never',
+              WebkitFontSmoothing: 'none',
+              MozOsxFontSmoothing: 'grayscale',
+              imageRendering: 'pixelated',
+              cursor: 'pointer'
+            }}
           >
             登出
           </button>
@@ -72,7 +96,19 @@ export default function AuthButtons() {
       ) : (
         <button 
           onClick={handleLogin}
-          className="px-4 py-1 bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white text-sm shadow-sm"
+          className="px-4 py-2 text-black font-mono text-sm"
+          style={{
+            backgroundColor: '#DDDDDD',
+            border: '1px solid #000000',
+            boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
+            borderRadius: '0px',
+            fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
+            fontSmooth: 'never',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'grayscale',
+            imageRendering: 'pixelated',
+            cursor: 'pointer'
+          }}
         >
           登入
         </button>
