@@ -1,75 +1,71 @@
 'use client';
 
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-interface AuthButtonsProps {
-  userEmail: string | undefined
-}
-
-export default function AuthButtons({ userEmail }: AuthButtonsProps) {
+export default function AuthButtons() {
   const router = useRouter();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // 登入：跳轉到我們新蓋的專業登入頁
-  const handleLogin = () => {
-    router.push('/login');
-  };
-
-  // 進入控制檯：暴力跳轉到 /admin
-  const handleAdmin = () => {
-    window.location.href = '/admin';
-  };
-
-  // 登出：徹底清除並強制刷回首頁
-  const handleLogout = async () => {
-    // 使用 browser client 進行登出
-    const { createBrowserClient } = await import('@supabase/ssr');
+  useEffect(() => {
+    // 初始化 Supabase Browser Client
     const supabase = createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
-    
+
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUserEmail(session?.user?.email ?? null);
+      setLoading(false);
+    };
+
+    checkSession();
+
+    // 監聽登入狀態變化
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserEmail(session?.user?.email ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = () => {
+    router.push('/login');
+  };
+
+  const handleAdmin = () => {
+    window.location.href = '/admin';
+  };
+
+  const handleLogout = async () => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
     await supabase.auth.signOut();
-    // 強制全網頁重整，這是解決 Cookie 殘留最有效的方法
     window.location.href = '/';
   };
 
+  if (loading) return null; // 載入時不顯示，避免畫面閃爍
+
+  const isVIP = userEmail === 'jaggersu@gmail.com' || userEmail === 'sujagger.104@gmail.com';
+
   return (
     <div className="flex gap-2 items-center">
-      {userEmail === 'jaggersu@gmail.com' || userEmail === 'sujagger.104@gmail.com' ? (
+      {isVIP ? (
         <>
           <button 
             onClick={handleAdmin}
-            className="px-4 py-2 text-black font-mono text-sm"
-            style={{
-              backgroundColor: '#DDDDDD',
-              border: '1px solid #000000',
-              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-              borderRadius: '0px',
-              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-              fontSmooth: 'never',
-              WebkitFontSmoothing: 'none',
-              MozOsxFontSmoothing: 'grayscale',
-              imageRendering: 'pixelated',
-              cursor: 'pointer'
-            }}
+            className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
           >
             進入控制檯
           </button>
           <button 
             onClick={handleLogout}
-            className="px-4 py-2 text-black font-mono text-sm"
-            style={{
-              backgroundColor: '#DDDDDD',
-              border: '1px solid #000000',
-              boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-              borderRadius: '0px',
-              fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-              fontSmooth: 'never',
-              WebkitFontSmoothing: 'none',
-              MozOsxFontSmoothing: 'grayscale',
-              imageRendering: 'pixelated',
-              cursor: 'pointer'
-            }}
+            className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
           >
             登出
           </button>
@@ -77,19 +73,7 @@ export default function AuthButtons({ userEmail }: AuthButtonsProps) {
       ) : (
         <button 
           onClick={handleLogin}
-          className="px-4 py-2 text-black font-mono text-sm"
-          style={{
-            backgroundColor: '#DDDDDD',
-            border: '1px solid #000000',
-            boxShadow: 'inset 1px 1px 0px rgba(255, 255, 255, 0.8), inset -1px -1px 0px rgba(0, 0, 0, 0.5)',
-            borderRadius: '0px',
-            fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-            fontSmooth: 'never',
-            WebkitFontSmoothing: 'none',
-            MozOsxFontSmoothing: 'grayscale',
-            imageRendering: 'pixelated',
-            cursor: 'pointer'
-          }}
+          className="px-4 py-1 text-black font-mono text-sm bg-[#cccccc] border-t-2 border-l-2 border-white border-b-2 border-r-2 border-black active:border-t-black active:border-l-black active:border-white shadow-sm"
         >
           登入
         </button>

@@ -1,63 +1,17 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
 import PortfolioGrid from "@/components/PortfolioGrid";
-import ExploreButton from "@/components/ExploreButton";
 import AuthButtons from "@/components/AuthButtons";
 import "./globals.css";
 
-export default async function HomePage() {
-  const cookieStore = await cookies()
-  
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get: (name: string) => {
-          const cookie = cookieStore.get(name)
-          return cookie?.value
-        },
-        set: (name: string, value: string, options: any) => {
-          try {
-            cookieStore.set({
-              name,
-              value,
-              ...options,
-              httpOnly: true,
-              sameSite: 'lax',
-              path: '/',
-              secure: process.env.NODE_ENV === 'production'
-            })
-          } catch (error) {
-            console.error('Cookie set error:', error)
-          }
-        },
-        remove: (name: string, options: any) => {
-          try {
-            cookieStore.delete({
-              name,
-              ...options,
-              path: '/'
-            })
-          } catch (error) {
-            console.error('Cookie delete error:', error)
-          }
-        },
-      },
-    }
-  )
-
-  // 在伺服器端直接獲取 session
-  const { data: { session } } = await supabase.auth.getSession()
-
+// 這裡我們不再用伺服器去查 Session，全部交給右上角的按鈕自己去查，這樣就不會當機。
+export default function HomePage() {
   return (
     <div className="relative min-h-screen">
-      {/* Mac OS 9 Login Button - Top Right */}
-      <div className="fixed top-4 right-4 z-50 pointer-events-auto">
-        <AuthButtons userEmail={session?.user?.email} />
+      {/* 右上角登入按鈕區域 */}
+      <div className="fixed top-4 right-4 z-50">
+        <AuthButtons />
       </div>
       
-      {/* Layer 2: Hero Section - Fixed Position with Parallax */}
+      {/* 英雄區塊 (Hero Section) */}
       <div
         className="fixed inset-0 z-10 flex items-center justify-center"
         style={{
@@ -72,54 +26,33 @@ export default async function HomePage() {
           backgroundSize: '4px 4px',
         }}
       >
-        {/* Hero Text */}
         <div className="text-center">
           <div className="mb-8">
             <h1 
               className="text-6xl sm:text-7xl lg:text-8xl font-black text-black mb-2"
-              style={{
-                fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                fontSmooth: 'never',
-                WebkitFontSmoothing: 'none',
-                MozOsxFontSmoothing: 'grayscale',
-                imageRendering: 'pixelated',
-                textShadow: '3px 3px 0px rgba(255, 255, 255, 0.8), -2px -2px 0px rgba(0, 0, 0, 0.3)',
-                letterSpacing: '0.02em',
-                lineHeight: '1.1'
-              }}
+              style={{ fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif' }}
             >
               Studio 99+
             </h1>
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4"
-                 style={{
-                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                   fontSmooth: 'never',
-                   WebkitFontSmoothing: 'none',
-                   MozOsxFontSmoothing: 'grayscale',
-                   imageRendering: 'pixelated',
-                   textShadow: '2px 2px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
-                   letterSpacing: '0.02em'
-                 }}>
+            <div 
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4"
+              style={{ fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif' }}
+            >
               Timeless Soul, Lightning Speed.
             </div>
-            <div className="text-lg sm:text-xl lg:text-2xl font-mono text-black"
-                 style={{
-                   fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif',
-                   fontSmooth: 'never',
-                   WebkitFontSmoothing: 'none',
-                   MozOsxFontSmoothing: 'grayscale',
-                   imageRendering: 'pixelated',
-                   textShadow: '1px 1px 0px rgba(255, 255, 255, 0.8), -1px -1px 0px rgba(0, 0, 0, 0.3)',
-                   letterSpacing: '0.02em'
-                 }}>
+            <div 
+              className="text-lg sm:text-xl lg:text-2xl font-mono text-black"
+              style={{ fontFamily: '"Chicago", "Charcoal", "Geneva", "Helvetica", Arial, sans-serif' }}
+            >
               閃電般經典的靈魂
             </div>
           </div>
         </div>
       </div>
 
-      {/* Layer 3: Portfolio Section - Scrollable Content */}
-      <div className="relative z-20 mt-[100vh] pt-20">
+      {/* 作品集區塊 (Portfolio Section) */}
+      <div className="relative z-20 pt-[100vh]"> 
+        {/* pt-[100vh] 確保作品集剛好在 Hero Section 往下滾動一整頁的位置，不再重疊 */}
         <div className="min-h-screen bg-[#CECECE]" 
              style={{
                backgroundImage: `repeating-linear-gradient(
