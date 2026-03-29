@@ -15,8 +15,17 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = () => {
+    console.log('=== 登入按鈕被點擊 ===')
     console.log('跳轉到登入頁面...')
-    router.push('/login')
+    console.log('Router 狀態:', router)
+    try {
+      router.push('/login')
+      console.log('router.push 已執行')
+    } catch (error) {
+      console.error('router.push 錯誤:', error)
+      // 備用方案：直接使用 window.location
+      window.location.href = '/login'
+    }
   };
 
   const handleAdminRedirect = () => {
@@ -110,7 +119,10 @@ export default function AuthButtons({ session }: AuthButtonsProps) {
             imageRendering: 'pixelated',
             cursor: 'pointer'
           }}
-          onMouseDown={playClickSound}
+          onMouseDown={(e) => {
+            console.log('=== onMouseDown 觸發 ===')
+            playClickSound()
+          }}
         >
           登入
         </button>

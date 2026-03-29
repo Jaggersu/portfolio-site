@@ -232,12 +232,12 @@ export default function LoginPage() {
           </div>
           
           {/* Third Party Login */}
-          <div className="space-y-3">
+          <div className="flex gap-2 justify-center">
             {/* Google Login */}
             <button
               onClick={handleGoogleLogin}
               disabled={loading}
-              className="w-full py-2 text-black font-mono text-sm flex items-center justify-center gap-2"
+              className="flex-1 py-2 text-black font-mono text-xs flex flex-col items-center justify-center gap-1"
               style={{
                 backgroundColor: '#FFFFFF',
                 border: '2px solid #808080',
@@ -248,19 +248,20 @@ export default function LoginPage() {
                 MozOsxFontSmoothing: 'grayscale',
                 imageRendering: 'pixelated',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.6 : 1
+                opacity: loading ? 0.6 : 1,
+                minWidth: '100px'
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-lg">🌐</span>
-              Google Login
+              <span className="text-base">🌐</span>
+              <span>Google</span>
             </button>
             
             {/* Apple Login */}
             <button
               onClick={handleAppleLogin}
               disabled={loading}
-              className="w-full py-2 text-black font-mono text-sm flex items-center justify-center gap-2"
+              className="flex-1 py-2 text-black font-mono text-xs flex flex-col items-center justify-center gap-1"
               style={{
                 backgroundColor: '#FFFFFF',
                 border: '2px solid #808080',
@@ -271,19 +272,20 @@ export default function LoginPage() {
                 MozOsxFontSmoothing: 'grayscale',
                 imageRendering: 'pixelated',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.6 : 1
+                opacity: loading ? 0.6 : 1,
+                minWidth: '100px'
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-lg">🍎</span>
-              Apple Login
+              <span className="text-base">🍎</span>
+              <span>Apple</span>
             </button>
             
             {/* Web3 Wallet Login */}
             <button
               onClick={handleWeb3Login}
               disabled={loading}
-              className="w-full py-2 text-black font-mono text-sm flex items-center justify-center gap-2"
+              className="flex-1 py-2 text-black font-mono text-xs flex flex-col items-center justify-center gap-1"
               style={{
                 backgroundColor: '#FFFFFF',
                 border: '2px solid #808080',
@@ -294,12 +296,13 @@ export default function LoginPage() {
                 MozOsxFontSmoothing: 'grayscale',
                 imageRendering: 'pixelated',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.6 : 1
+                opacity: loading ? 0.6 : 1,
+                minWidth: '100px'
               }}
               onMouseDown={playClickSound}
             >
-              <span className="text-lg">💳</span>
-              Web3 Wallet Login
+              <span className="text-base">💳</span>
+              <span>Web3</span>
             </button>
           </div>
         </div>
